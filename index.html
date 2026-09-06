@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hải Đăng Sức Khỏe — Côn Đảo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root{
+  --navy:#0B2A43;
+  --navy-soft:#123A5C;
+  --blue:#2F6FE0;
+  --blue-dark:#2456B5;
+  --blue-light:#EAF2FF;
+  --green:#17B26A;
+  --green-dark:#129258;
+  --mint:#E7FAF1;
+  --coral:#FF6B4A;
+  --coral-light:#FFE7E0;
+  --ink:#0E2231;
+  --ink-soft:#5B6E7A;
+  --line:#E1E9F0;
+  --paper:#F6F9FC;
+  --white:#FFFFFF;
+  --radius:18px;
+  --radius-sm:12px;
+  --radius-full:999px;
+  --shadow:0 18px 40px -18px rgba(11,42,67,.25);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;-webkit-font-smoothing:antialiased;}
+h1,h2,h3{font-family:'Be Vietnam Pro',sans-serif;letter-spacing:-0.01em;margin:0;}
+.mono{font-family:'IBM Plex Mono',monospace;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;}
+img,svg{display:block;max-width:100%;}
+
+/* ---------- Utility ---------- */
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono';font-size:12px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:14px;
+}
+.eyebrow svg{width:16px;height:16px;}
+.btn{
+  border:none;cursor:pointer;font-weight:700;font-size:14px;letter-spacing:.02em;
+  padding:14px 26px;border-radius:var(--radius-full);transition:.15s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary{background:var(--green);color:#fff;}
+.btn-primary:hover{background:var(--green-dark);transform:translateY(-1px);}
+.btn-secondary{background:var(--blue);color:#fff;}
+.btn-secondary:hover{background:var(--blue-dark);transform:translateY(-1px);}
+.btn-outline{background:#fff;color:var(--navy);border:1.5px solid var(--line);}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+.btn-ghost-light{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.35);}
+.btn-ghost-light:hover{background:rgba(255,255,255,.2);}
+
+.section-head{max-width:640px;margin:0 auto 40px;text-align:center;}
+.section-head h2{font-size:clamp(24px,3.4vw,34px);color:var(--navy);}
+.section-head p{margin:10px 0 0;color:var(--ink-soft);font-size:15px;line-height:1.6;}
+
+/* ---------- Topbar ---------- */
+.topbar{background:var(--navy);color:#CFE0F0;font-size:12.5px;}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:9px 24px;gap:10px;flex-wrap:wrap;}
+.topbar-info{display:flex;gap:22px;flex-wrap:wrap;}
+.topbar-info span{display:inline-flex;align-items:center;gap:7px;}
+.topbar-info svg{width:14px;height:14px;opacity:.85;}
+.topbar-social{display:flex;gap:12px;align-items:center;}
+.topbar-social a{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;}
+.topbar-social svg{width:12px;height:12px;}
+
+/* ---------- Header / nav ---------- */
+.header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;gap:20px;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand svg{width:38px;height:38px;flex-shrink:0;}
+.brand-text{display:flex;flex-direction:column;line-height:1.15;}
+.brand-text b{font-size:18px;color:var(--navy);font-weight:800;}
+.brand-text span{font-size:11px;color:var(--green-dark);font-weight:700;letter-spacing:.04em;text-transform:uppercase;}
+.nav{display:flex;gap:2px;background:var(--blue-light);padding:4px;border-radius:var(--radius-full);}
+.tab-btn{
+  border:none;background:transparent;padding:10px 18px;border-radius:var(--radius-full);
+  font-size:13.5px;font-weight:700;color:var(--navy-soft);cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.tab-btn.active{background:var(--navy);color:#fff;}
+.tab-btn:hover:not(.active){color:var(--blue);}
+.header-actions{display:flex;align-items:center;gap:12px;}
+.header-actions .btn{padding:11px 20px;font-size:13px;}
+@media(max-width:920px){
+  .nav{order:3;width:100%;overflow-x:auto;justify-content:flex-start;}
+  .header .wrap{flex-wrap:wrap;}
+  .topbar-info span:nth-child(3){display:none;}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#F2F8FF 0%,var(--paper) 100%);padding:64px 0 40px;}
+.hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;}
+@media(max-width:900px){.hero-inner{grid-template-columns:1fr;}}
+.hero h1{font-size:clamp(32px,4.6vw,50px);line-height:1.1;font-weight:800;color:var(--navy);margin:0 0 18px;}
+.hero h1 span{color:var(--green);}
+.hero p{font-size:16px;line-height:1.7;color:var(--ink-soft);max-width:520px;margin:0 0 28px;}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;}
+.hero-stats{display:flex;gap:30px;flex-wrap:wrap;}
+.hero-stat b{display:block;font-size:24px;color:var(--navy);font-weight:800;}
+.hero-stat span{font-size:12px;color:var(--ink-soft);font-family:'IBM Plex Mono';}
+
+.hero-visual{position:relative;display:flex;justify-content:center;align-items:center;min-height:380px;}
+.hero-blob{
+  width:340px;height:340px;border-radius:46% 54% 58% 42% / 48% 42% 58% 52%;
+  background:linear-gradient(150deg,var(--blue) 0%,var(--navy) 100%);
+  display:flex;align-items:center;justify-content:center;position:relative;box-shadow:var(--shadow);
+  animation:blobshift 10s ease-in-out infinite;
+}
+@keyframes blobshift{0%,100%{border-radius:46% 54% 58% 42% / 48% 42% 58% 52%;}50%{border-radius:58% 42% 46% 54% / 42% 58% 42% 58%;}}
+.hero-blob svg{width:56%;height:56%;}
+.beam{transform-origin:110px 70px;animation:sweep 4.5s ease-in-out infinite;}
+@keyframes sweep{0%,100%{transform:rotate(-14deg);}50%{transform:rotate(14deg);}}
+.float-card{
+  position:absolute;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);
+  display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:700;color:var(--navy);
+  animation:floaty 5s ease-in-out infinite;
+}
+.float-card svg{width:20px;height:20px;flex-shrink:0;}
+.float-card small{display:block;color:var(--ink-soft);font-weight:500;font-size:10.5px;font-family:'IBM Plex Mono';}
+.float-card.f1{top:6%;left:-4%;animation-delay:.2s;}
+.float-card.f2{bottom:10%;right:-6%;animation-delay:1s;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.deco-dots{position:absolute;width:120px;height:90px;opacity:.5;}
+.deco-dots.d1{top:20px;left:0;}
+.deco-cross{position:absolute;color:var(--green);opacity:.55;}
+.deco-cross svg{width:34px;height:34px;}
+.deco-cross.c1{top:8%;right:20%;}
+.deco-cross.c2{bottom:4%;left:10%;color:var(--blue);}
+@media(max-width:600px){.hero-visual{min-height:300px;}.hero-blob{width:250px;height:250px;}.float-card{font-size:11px;padding:9px 12px;}}
+
+.tide{display:block;width:100%;height:46px;margin-top:-2px;}
+
+/* ---------- About ---------- */
+.about{padding:70px 0;background:#fff;}
+.about-inner{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center;}
+@media(max-width:900px){.about-inner{grid-template-columns:1fr;}}
+.about-visual{position:relative;padding:0 0 40px 0;}
+.phone-mock{
+  width:min(320px,100%);margin:0 auto;background:var(--navy);border-radius:32px;padding:14px;box-shadow:var(--shadow);
+  position:relative;
+}
+.phone-notch{width:70px;height:6px;background:rgba(255,255,255,.25);border-radius:99px;margin:0 auto 10px;}
+.phone-chat{background:var(--blue-light);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:260px;}
+.phone-msg{max-width:82%;padding:9px 13px;border-radius:12px;font-size:12.5px;line-height:1.5;}
+.phone-msg.bot{align-self:flex-start;background:#fff;color:var(--ink);border-bottom-left-radius:3px;box-shadow:0 4px 10px rgba(11,42,67,.06);}
+.phone-msg.user{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:3px;}
+.testimonial-card{
+  position:absolute;left:-6%;bottom:-24px;background:#fff;border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);
+  width:250px;max-width:80vw;
+}
+.testimonial-card .t-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.t-avatar{width:38px;height:38px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;}
+.testimonial-card b{font-size:13.5px;color:var(--navy);}
+.testimonial-card .t-loc{font-size:11.5px;color:var(--ink-soft);}
+.stars{color:#F5A623;font-size:12px;letter-spacing:1px;}
+.testimonial-card p{font-size:12.5px;color:var(--ink-soft);line-height:1.5;margin:0;}
+
+.about-eyebrow{color:var(--green-dark);}
+.about h2{font-size:clamp(24px,3.4vw,34px);color:var(--navy);margin-bottom:16px;line-height:1.2;}
+.about p.lead{color:var(--ink-soft);font-size:15px;line-height:1.7;margin:0 0 22px;}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-bottom:26px;}
+.check-item{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:var(--navy);}
+.check-item svg{width:19px;height:19px;color:var(--green);flex-shrink:0;}
+
+/* ---------- Services ---------- */
+.services{padding:70px 0;background:var(--paper);}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+@media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.svc-grid{grid-template-columns:1fr;}}
+.svc-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;text-align:center;transition:.2s;}
+.svc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent;}
+.svc-icon{width:58px;height:58px;border-radius:50%;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.svc-card:nth-child(4n+2) .svc-icon{background:var(--mint);color:var(--green-dark);}
+.svc-card:nth-child(4n+3) .svc-icon{background:var(--coral-light);color:var(--coral);}
+.svc-card:nth-child(4n+4) .svc-icon{background:#EEF0FF;color:#5A4FE0;}
+.svc-icon svg{width:26px;height:26px;}
+.svc-card h3{font-size:16px;color:var(--navy);margin-bottom:4px;}
+.svc-card .svc-stat{font-size:12.5px;color:var(--ink-soft);margin-bottom:16px;font-family:'IBM Plex Mono';}
+.svc-more{background:var(--blue-light);color:var(--blue);border:none;border-radius:var(--radius-full);padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;}
+.svc-more:hover{background:var(--blue);color:#fff;}
+.svc-footer{text-align:center;margin-top:30px;color:var(--ink-soft);font-size:13.5px;}
+.svc-footer button{background:none;border:none;color:var(--blue);font-weight:700;cursor:pointer;font-size:13.5px;}
+
+/* ---------- Network / trust banner ---------- */
+.network{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);color:#fff;padding:70px 0;position:relative;overflow:hidden;}
+.network-inner{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;}
+@media(max-width:900px){.network-inner{grid-template-columns:1fr;}}
+.network h2{font-size:clamp(24px,3.4vw,32px);margin-bottom:16px;}
+.network p{color:#B7D3E8;font-size:15px;line-height:1.7;max-width:480px;margin:0 0 26px;}
+.network-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.net-diagram{position:relative;width:100%;max-width:420px;margin:0 auto;}
+.net-node{position:absolute;transform:translate(-50%,-50%);text-align:center;}
+.net-node .dot{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;}
+.net-node.center .dot{background:var(--green);border-color:var(--green);width:64px;height:64px;}
+.net-node svg{width:24px;height:24px;color:#fff;}
+.net-node span{display:block;font-size:11px;color:#CFE0F0;font-family:'IBM Plex Mono';max-width:110px;}
+.net-lines path{stroke:rgba(255,255,255,.35);stroke-width:1.5;stroke-dasharray:5 5;fill:none;animation:dash 3s linear infinite;}
+@keyframes dash{to{stroke-dashoffset:-40;}}
+
+/* ---------- Panels (app sections) ---------- */
+.panel{display:none;animation:fade .35s ease;}
+.panel.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.panel-hero{background:var(--navy);color:#fff;padding:46px 0 60px;text-align:center;}
+.panel-hero h2{font-size:clamp(24px,3.4vw,32px);margin-bottom:8px;}
+.panel-hero p{color:#B7D3E8;font-size:14.5px;max-width:520px;margin:0 auto;}
+.panel-body{padding:44px 0 80px;}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+@media(max-width:760px){.grid-2{grid-template-columns:1fr;}}
+.card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+.card h3{font-size:15.5px;margin:0 0 16px;color:var(--navy);}
+
+label{display:block;font-size:11.5px;font-weight:700;color:var(--ink-soft);margin:0 0 6px;text-transform:uppercase;letter-spacing:.03em;}
+input,select,textarea{
+  width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;
+  font-family:'Be Vietnam Pro';font-size:14px;background:var(--paper);color:var(--ink);margin-bottom:14px;
+}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-offset:1px;}
+
+.list-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);}
+.list-row:last-child{border-bottom:none;}
+.pill{font-size:11px;font-family:'IBM Plex Mono';padding:3px 10px;border-radius:999px;background:var(--blue-light);color:var(--blue-dark);}
+.icon-btn{background:none;border:none;cursor:pointer;color:#AEC0CB;font-size:16px;}
+.icon-btn:hover{color:var(--coral);}
+
+.reminder{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);}
+.reminder:last-child{border-bottom:none;}
+.check{width:21px;height:21px;border-radius:7px;border:2px solid var(--blue);cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;}
+.check.done{background:var(--green);border-color:var(--green);}
+.reminder .txt.done{text-decoration:line-through;color:#9AAAA6;}
+
+.vitals-chart{width:100%;height:120px;}
+.connect-card{border:1.5px dashed var(--blue);background:var(--blue-light);}
+.status-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'IBM Plex Mono';color:var(--green-dark);margin-top:10px;}
+
+/* ---------- Chat ---------- */
+.chat-shell{display:grid;grid-template-columns:230px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;height:580px;box-shadow:var(--shadow);}
+@media(max-width:760px){.chat-shell{grid-template-columns:1fr;height:auto;}}
+.chat-side{background:var(--navy);color:#fff;padding:22px;}
+.chat-side h3{font-size:14px;margin:0 0 4px;color:#fff;}
+.chat-side p{font-size:12px;color:#B7D3E8;line-height:1.5;margin:0 0 18px;}
+.quick-btn{display:block;width:100%;text-align:left;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#fff;padding:11px 13px;border-radius:10px;font-size:13px;margin-bottom:8px;cursor:pointer;font-family:'Be Vietnam Pro';}
+.quick-btn:hover{background:rgba(255,255,255,.16);}
+.quick-btn.emergency{background:var(--coral);border-color:var(--coral);font-weight:700;}
+.quick-btn.emergency:hover{background:#E85535;}
+.drag-tip{margin-top:16px;font-size:11px;color:#8FB0C9;line-height:1.6;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;}
+
+.chat-main{display:flex;flex-direction:column;}
+.chat-log{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:6px;}
+.msg-wrap{display:flex;align-items:center;gap:6px;touch-action:none;}
+.msg-wrap.user{justify-content:flex-end;}
+.msg-wrap.bot{justify-content:flex-start;}
+.msg-wrap.system{justify-content:center;}
+.msg-wrap.dragging{opacity:.45;}
+.msg-grip{
+  background:none;border:none;cursor:grab;color:#C3D2DA;font-size:16px;line-height:1;padding:6px;
+  opacity:0;transition:.15s;flex-shrink:0;border-radius:6px;
+}
+.msg-wrap:hover .msg-grip,.msg-grip:focus{opacity:1;}
+.msg-grip:active{cursor:grabbing;background:var(--blue-light);}
+.msg{max-width:78%;padding:11px 15px;border-radius:14px;font-size:14px;line-height:1.55;}
+.msg.user{background:var(--navy);color:#fff;border-bottom-right-radius:4px;}
+.msg.bot{background:var(--blue-light);color:var(--ink);border-bottom-left-radius:4px;}
+.msg.bot b{color:var(--navy);}
+.msg.bot ul{margin:6px 0;padding-left:18px;}
+.msg.bot li{margin-bottom:4px;}
+.msg.bot p{margin:0 0 8px;}
+.msg.bot p:last-child{margin-bottom:0;}
+.chat-name{font-size:11px;font-weight:700;color:var(--blue-dark);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;}
+.typing-dots{display:inline-flex;gap:3px;align-self:flex-start;background:var(--blue-light);padding:12px 16px;border-radius:14px;border-bottom-left-radius:4px;}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:#9AAAA6;animation:blink 1.2s infinite;}
+.typing-dots span:nth-child(2){animation-delay:.2s;}
+.typing-dots span:nth-child(3){animation-delay:.4s;}
+@keyframes blink{0%,80%,100%{opacity:.3}40%{opacity:1}}
+.msg.system{background:var(--coral-light);color:#B8431F;border-radius:10px;font-size:13px;text-align:center;}
+.chat-input{display:flex;gap:8px;padding:14px;border-top:1px solid var(--line);}
+.chat-input input{margin:0;}
+.send-btn{background:var(--navy);color:#fff;border:none;border-radius:10px;padding:0 20px;cursor:pointer;font-weight:700;}
+.send-btn:hover{background:var(--blue-dark);}
+
+.disclaimer{font-size:12.5px;color:var(--ink-soft);margin-top:16px;padding:12px 14px;background:var(--blue-light);border-radius:10px;}
+
+.foot{background:var(--navy);color:#9FBBD0;text-align:center;padding:34px 24px;font-size:12.5px;line-height:1.8;}
+.foot a{color:#7FC4A0;font-weight:700;}
+
+/* ---------- Auth area ---------- */
+.auth-area{display:flex;align-items:center;gap:10px;}
+#auth-user-box{display:flex;align-items:center;gap:8px;background:var(--blue-light);padding:6px 8px 6px 14px;border-radius:var(--radius-full);}
+#auth-user-name{font-size:13px;font-weight:700;color:var(--navy);}
+
+/* ---------- Modal ---------- */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(11,42,67,0.55);z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+}
+.modal-card{background:#fff;border-radius:var(--radius);padding:28px;width:100%;max-width:420px;box-shadow:var(--shadow);}
+.modal-tabs{display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.modal-tab-btn{border:none;background:none;font-weight:800;font-size:18px;color:#B7C2CC;cursor:pointer;padding:4px 0;}
+.modal-tab-btn.active{color:var(--navy);border-bottom:2px solid var(--coral);}
+.auth-error{background:var(--coral-light);color:#B8431F;font-size:13px;padding:10px 12px;border-radius:10px;margin-bottom:14px;}
+.tip-box{font-size:12px;color:var(--blue-dark);background:var(--blue-light);padding:8px 10px;border-radius:8px;margin:-4px 0 14px;}
+
+/* ---------- Admin / Medical dashboards ---------- */
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{text-align:left;color:var(--ink-soft);font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;letter-spacing:.03em;padding:8px 10px;border-bottom:2px solid var(--line);}
+.data-table td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle;}
+.data-table select{margin:0;padding:6px 8px;font-size:12px;}
+.status-pill{font-size:11px;font-family:'IBM Plex Mono';padding:3px 10px;border-radius:999px;display:inline-block;}
+.status-pill.moi,.status-pill.cho_duyet{background:var(--coral-light);color:#B8431F;}
+.status-pill.dang_xu_ly,.status-pill.pending{background:#FFF3D6;color:#8A6300;}
+.status-pill.da_xu_ly,.status-pill.da_duyet,.status-pill.active{background:var(--mint);color:var(--green-dark);}
+.status-pill.blocked,.status-pill.tu_choi{background:var(--coral-light);color:#B8431F;}
+.small-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-family:inherit;}
+.small-btn.approve{background:var(--blue);color:#fff;}
+.small-btn.block{background:var(--coral);color:#fff;}
+.request-card{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;background:#fff;}
+.request-card textarea{margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="topbar-info">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.36 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> 0254 383 0250</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6h20v12H2z"/><path d="M22 6l-10 7L2 6"/></svg> tramyte@condao.gov.vn</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Trung tâm Y tế Đặc khu Côn Đảo, TPHCM</span>
+    </div>
+    <div class="topbar-social">
+      <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" aria-label="Zalo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></a>
+      <a href="#" aria-label="Youtube"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z"/></svg></a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="wrap">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2L4 20h16L12 2z" stroke="#0B2A43" stroke-width="1.6" fill="#2F6FE0"/><path d="M9 20l1.5-6h3L15 20" stroke="#0B2A43" stroke-width="1.4"/></svg>
+      <div class="brand-text"><b>Hải Đăng</b><span>Sức Khỏe Côn Đảo</span></div>
+    </div>
+    <div class="nav">
+      <button class="tab-btn active" data-tab="home">Trang chủ</button>
+      <button class="tab-btn role-citizen" data-tab="profile" style="display:none;">Hồ sơ sức khỏe</button>
+      <button class="tab-btn role-citizen" data-tab="care" style="display:none;">Chăm sóc sức khỏe</button>
+      <button class="tab-btn role-citizen" data-tab="chat" style="display:none;">Trợ lý AI</button>
+      <button class="tab-btn role-medical" data-tab="medical" style="display:none;">Nhân viên y tế</button>
+      <button class="tab-btn role-admin" data-tab="admin" style="display:none;">Quản trị</button>
+    </div>
+    <div class="header-actions auth-area">
+      <button class="btn btn-outline" id="auth-login-btn" onclick="openAuthModal('login')">Đăng nhập</button>
+      <div id="auth-user-box" style="display:none;">
+        <span id="auth-user-name" class="mono"></span>
+        <span id="auth-user-role" class="pill"></span>
+        <button class="icon-btn" onclick="logout()" title="Đăng xuất">⏻</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="auth-modal-backdrop" class="modal-backdrop" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-tabs">
+      <button class="modal-tab-btn active" id="auth-tab-login" onclick="setAuthMode('login')">Đăng nhập</button>
+      <button class="modal-tab-btn" id="auth-tab-register" onclick="setAuthMode('register')">Đăng ký</button>
+      <button class="icon-btn" style="margin-left:auto;font-size:20px;" onclick="closeAuthModal()">✕</button>
+    </div>
+    <div id="auth-error" class="auth-error" style="display:none;"></div>
+    <form id="login-form" onsubmit="return handleLogin(event)">
+      <label>Email</label>
+      <input id="login-email" type="email" required placeholder="ban@vidu.com">
+      <label>Mật khẩu</label>
+      <input id="login-password" type="password" required placeholder="••••••••">
+      <button class="btn btn-primary" style="width:100%;justify-content:center;" type="submit">Đăng nhập</button>
+    </form>
+    <form id="register-form" style="display:none;" onsubmit="return handleRegister(event)">
+      <label>Họ và tên</label>
+      <input id="reg-name" required placeholder="Nguyễn Văn A">
+      <label>Email</label>
+      <input id="reg-email" type="email" required placeholder="ban@vidu.com">
+      <label>Mật khẩu</label>
+      <input id="reg-password" type="password" required placeholder="Tối thiểu 6 ký tự">
+      <label>Bạn đăng ký với vai trò</label>
+      <select id="reg-role">
+        <option value="citizen">Người dân</option>
+        <option value="medical">Nhân viên y tế</option>
+      </select>
+      <div id="reg-medical-note" class="tip-box" style="display:none;">Tài khoản nhân viên y tế cần được quản trị viên duyệt trước khi đăng nhập được.</div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;" type="submit">Đăng ký</button>
+    </form>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="panel-home" class="panel active">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="deco-cross c1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z"/></svg></div>
+    <div class="deco-cross c2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z"/></svg></div>
+    <div class="wrap hero-inner">
+      <div>
+        <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> DỊCH VỤ Y TẾ TỪ XA 24/7</div>
+        <h1>Ánh sáng dẫn đường<br>cho <span>sức khỏe</span> đảo xa</h1>
+        <p>Nền tảng AI hỗ trợ cảnh báo nguy cơ sức khỏe và kết nối chăm sóc y tế từ xa — giúp người dân Côn Đảo tiếp cận bác sĩ, bệnh viện và chính quyền chỉ trong vài giây, dù cách đất liền 230km.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary" onclick="switchTab('chat')">Mở trợ lý AI</button>
+          <button class="btn btn-outline" onclick="switchTab('profile')">Tạo hồ sơ sức khỏe</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>9</b><span>KHU DÂN CƯ ĐƯỢC PHỦ SÓNG</span></div>
+          <div class="hero-stat"><b>24/7</b><span>KẾT NỐI KHẨN CẤP</span></div>
+          <div class="hero-stat"><b>1</b><span>TTYT QUÂN DÂN Y CÔN ĐẢO</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="deco-dots d1"><svg viewBox="0 0 120 90"><g fill="#2F6FE0" opacity=".5">
+          <circle cx="4" cy="4" r="3"/><circle cx="22" cy="4" r="3"/><circle cx="40" cy="4" r="3"/>
+          <circle cx="4" cy="22" r="3"/><circle cx="22" cy="22" r="3"/><circle cx="40" cy="22" r="3"/>
+          <circle cx="4" cy="40" r="3"/><circle cx="22" cy="40" r="3"/><circle cx="40" cy="40" r="3"/>
+        </g></svg></div>
+        <div class="hero-blob">
+          <svg viewBox="0 0 220 200">
+            <rect x="98" y="100" width="24" height="70" fill="#F5F8F6"/>
+            <polygon points="88,100 132,100 122,74 98,74" fill="#FF6B4A"/>
+            <rect x="95" y="52" width="30" height="24" rx="2" fill="#0B2A43"/>
+            <polygon points="92,52 128,52 110,34" fill="#E8703A"/>
+            <g class="beam">
+              <polygon points="110,48 205,18 205,84" fill="#FDECD8" opacity=".4"/>
+              <polygon points="110,48 15,18 15,84" fill="#FDECD8" opacity=".22"/>
+            </g>
+            <circle cx="110" cy="48" r="6" fill="#FFE7A8"/>
+          </svg>
+        </div>
+        <div class="float-card f1"><svg viewBox="0 0 24 24" fill="none" stroke="#FF6B4A" stroke-width="2.2"><polyline points="3 12 8 12 10 6 14 18 16 12 21 12"/></svg><div>Nhịp tim<small>76 bpm — ổn định</small></div></div>
+        <div class="float-card f2"><svg viewBox="0 0 24 24" fill="none" stroke="#17B26A" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><div>Đã kết nối<small>Trạm Y tế Côn Đảo</small></div></div>
+      </div>
+    </div>
+  </div>
+  <svg class="tide" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,24 C300,46 900,0 1200,24 L1200,0 L0,0 Z" fill="#F2F8FF"></path><path d="M0,30 C300,52 900,6 1200,30 L1200,46 L0,46 Z" fill="#fff"></path></svg>
+
+  <!-- ABOUT -->
+  <div class="about">
+    <div class="wrap about-inner">
+      <div class="about-visual">
+        <div class="phone-mock">
+          <div class="phone-notch"></div>
+          <div class="phone-chat">
+            <div class="phone-msg bot">Xin chào! Mình là Trợ lý Hải Đăng 👋 Mình có thể giúp gì cho bạn?</div>
+            <div class="phone-msg user">Con em bị sốt nhẹ, phải làm sao ạ?</div>
+            <div class="phone-msg bot">Bé sốt được bao lâu rồi, và có kèm ho hay phát ban không ạ?</div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="t-top">
+            <div class="t-avatar">L</div>
+            <div><b>Chị Lan</b><div class="t-loc">Khu dân cư 5, Côn Đảo</div></div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <p>"Nửa đêm con sốt cao mà không biết hỏi ai, may nhờ trợ lý AI hướng dẫn kịp thời."</p>
+        </div>
+      </div>
+      <div>
+        <div class="eyebrow about-eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> GIỚI THIỆU</div>
+        <h2>Giải Pháp Chăm Sóc Sức Khỏe Hợp Lý Cho Đảo Xa</h2>
+        <p class="lead">Côn Đảo cách đất liền 230km, việc tiếp cận y tế chuyên sâu còn nhiều hạn chế. Hải Đăng Sức Khỏe kết nối người dân với Trạm Y tế Côn Đảo, bác sĩ chuyên khoa từ xa và trợ lý AI — để không ai phải đơn độc khi cần chăm sóc sức khỏe.</p>
+        <div class="check-grid">
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Hồ sơ sức khỏe cá nhân</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Trợ lý AI tư vấn 24/7</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Nhắc lịch uống thuốc</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Kết nối khẩn cấp tức thì</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Theo dõi chỉ số sức khỏe</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Bác sĩ chuyên khoa từ xa</div>
+        </div>
+        <button class="btn btn-primary" onclick="switchTab('care')">Tìm hiểu thêm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" style="justify-content:center;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/></svg> TÍNH NĂNG ĐA DẠNG</div>
+        <h2>Chăm Sóc Sức Khỏe Chủ Động, Toàn Diện</h2>
+        <p>Tám tính năng cốt lõi được xây dựng riêng cho đặc thù vùng đảo xa.</p>
+      </div>
+      <div class="svc-grid">
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg></div>
+          <h3>Hồ sơ sức khỏe</h3><div class="svc-stat">Lưu trữ trọn đời</div>
+          <button class="svc-more" onclick="switchTab('profile')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/></svg></div>
+          <h3>Nhắc lịch uống thuốc</h3><div class="svc-stat">Không bỏ lỡ liều</div>
+          <button class="svc-more" onclick="switchTab('care')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 12 8 12 10 6 14 18 16 12 21 12"/></svg></div>
+          <h3>Theo dõi chỉ số</h3><div class="svc-stat">Cập nhật mỗi ngày</div>
+          <button class="svc-more" onclick="switchTab('care')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg></div>
+          <h3>Trợ lý AI</h3><div class="svc-stat">Tư vấn 24/7</div>
+          <button class="svc-more" onclick="switchTab('chat')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 1 21h22z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17" r=".8" fill="currentColor"/></svg></div>
+          <h3>Kết nối khẩn cấp</h3><div class="svc-stat">Phản hồi tức thì</div>
+          <button class="svc-more" onclick="switchTab('chat')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-4v12l-6-4z"/></svg></div>
+          <h3>Bác sĩ chuyên khoa</h3><div class="svc-stat">Khám từ xa</div>
+          <button class="svc-more" onclick="switchTab('chat')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></div>
+          <h3>Xin vật tư &amp; thuốc</h3><div class="svc-stat">Trạm Y tế Côn Đảo</div>
+          <button class="svc-more" onclick="switchTab('care')">XEM THÊM</button>
+        </div>
+        <div class="svc-card">
+          <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M12 17s-3-1.8-3-4a2 2 0 0 1 3-1.7 2 2 0 0 1 3 1.7c0 2.2-3 4-3 4z"/></svg></div>
+          <h3>Chăm sóc tại nhà</h3><div class="svc-stat">Người thân an tâm</div>
+          <button class="svc-more" onclick="switchTab('profile')">XEM THÊM</button>
+        </div>
+      </div>
+      <div class="svc-footer">Cần hỗ trợ ngay bây giờ? <button onclick="switchTab('chat')">Mở trợ lý AI →</button></div>
+    </div>
+  </div>
+
+  <!-- NETWORK -->
+  <div class="network">
+    <div class="wrap network-inner">
+      <div>
+        <div class="eyebrow" style="color:#7FC4A0;">MẠNG LƯỚI KẾT NỐI</div>
+        <h2>Không Ai Đơn Độc Khi Cần Chăm Sóc Sức Khỏe</h2>
+        <p>Mỗi người dân trên đảo đều được kết nối trực tiếp với Trạm Y tế Côn Đảo, đội ngũ bác sĩ chuyên khoa tại đất liền và trợ lý AI túc trực 24/7 — sẵn sàng hỗ trợ ngay khi cần, dù ở khu dân cư xa nhất.</p>
+        <div class="network-ctas">
+          <button class="btn btn-primary" onclick="switchTab('profile')">Tạo hồ sơ ngay</button>
+          <button class="btn btn-ghost-light" onclick="switchTab('chat')">Tư vấn miễn phí</button>
+        </div>
+      </div>
+      <div class="net-diagram">
+        <svg viewBox="0 0 400 300" class="net-lines" style="width:100%;height:auto;">
+          <path d="M200,150 C150,120 120,90 90,66"/>
+          <path d="M200,150 C250,120 280,90 310,66"/>
+          <path d="M200,150 C200,190 200,220 200,244"/>
+        </svg>
+        <div class="net-node" style="left:22%;top:22%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 20h16L12 2z"/></svg></div><span>Trạm Y tế Côn Đảo</span></div>
+        <div class="net-node" style="left:78%;top:22%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z"/></svg></div><span>Bệnh viện tuyến trên</span></div>
+        <div class="net-node center" style="left:50%;top:50%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><span>Người dân Côn Đảo</span></div>
+        <div class="net-node" style="left:50%;top:82%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg></div><span>Trợ lý AI 24/7</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HO SO SUC KHOE -->
+<div id="panel-profile" class="panel">
+  <div class="panel-hero"><h2>Hồ Sơ Sức Khỏe Gia Đình</h2><p>Quản lý hồ sơ của từng thành viên trong gia đình — luôn sẵn sàng khi cần đến bác sĩ.</p></div>
+  <div class="wrap panel-body">
+
+    <div class="card" style="margin-bottom:22px;">
+      <h3>Thành viên gia đình</h3>
+      <div id="family-tabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;"></div>
+      <div class="grid-2">
+        <input id="fam-new-name" placeholder="Tên thành viên mới (VD: Nguyễn Văn B)">
+        <select id="fam-new-relationship">
+          <option value="">Quan hệ với bạn</option>
+          <option>Bản thân</option><option>Vợ/Chồng</option><option>Con</option>
+          <option>Bố</option><option>Mẹ</option><option>Ông</option><option>Bà</option><option>Khác</option>
+        </select>
+      </div>
+      <button class="btn btn-outline" onclick="addFamilyMember()">+ Thêm thành viên</button>
+    </div>
+
+    <div id="family-empty" class="card" style="display:none;text-align:center;color:var(--ink-soft);">
+      Chưa có thành viên nào — thêm thành viên đầu tiên ở trên (có thể là chính bạn).
+    </div>
+
+    <div id="family-detail" style="display:none;">
+      <div id="member-alerts" style="margin-bottom:16px;"></div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Thông tin cá nhân</h3>
+          <label>Họ và tên</label>
+          <input id="p-name" placeholder="Nguyễn Văn A">
+          <div class="grid-2">
+            <div><label>Ngày sinh</label><input id="p-dob" type="date"></div>
+            <div><label>Giới tính</label>
+              <select id="p-gender"><option>Nam</option><option>Nữ</option><option>Khác</option></select>
+            </div>
+          </div>
+          <label>Quan hệ với bạn</label>
+          <input id="p-relationship" placeholder="VD: Bản thân, Con, Mẹ...">
+          <label>Tiền sử bệnh / dị ứng</label>
+          <textarea id="p-history" rows="3" placeholder="VD: Tăng huyết áp, dị ứng penicillin..."></textarea>
+          <button class="btn btn-primary" onclick="saveProfile()">Lưu hồ sơ</button>
+          <button class="btn btn-outline" style="border-color:#FF6B4A;color:#FF6B4A;" onclick="deleteFamilyMember()">Xóa thành viên này</button>
+          <div id="profile-saved" class="status-tag" style="display:none;">✓ Đã lưu hồ sơ</div>
+        </div>
+
+        <div>
+          <div class="card" style="margin-bottom:22px;">
+            <h3>Lịch sử khám bệnh</h3>
+            <div id="exam-list"></div>
+            <div class="grid-2" style="margin-top:10px;">
+              <input id="exam-date" type="date">
+              <input id="exam-place" placeholder="Nơi khám">
+            </div>
+            <input id="exam-note" placeholder="Chẩn đoán / ghi chú">
+            <button class="btn btn-outline" onclick="addExam()">+ Thêm lần khám</button>
+          </div>
+
+          <div class="card">
+            <h3>Lịch sử dùng thuốc</h3>
+            <div id="med-list"></div>
+            <div class="grid-2" style="margin-top:10px;">
+              <input id="med-name" placeholder="Tên thuốc">
+              <input id="med-schedule" placeholder="VD: Sáng - tối, sau ăn">
+            </div>
+            <button class="btn btn-outline" onclick="addMed()">+ Thêm thuốc</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHAM SOC SUC KHOE -->
+<div id="panel-care" class="panel">
+  <div class="panel-hero"><h2>Chăm Sóc Sức Khỏe</h2><p>Nhắc lịch, theo dõi chỉ số và kết nối cơ sở y tế trên địa bàn.</p></div>
+  <div class="wrap panel-body">
+    <div class="grid-2">
+      <div class="card">
+        <h3>Nhắc lịch</h3>
+        <div id="reminder-list"></div>
+        <div class="grid-2" style="margin-top:10px;">
+          <input id="rem-text" placeholder="VD: Uống thuốc huyết áp">
+          <input id="rem-time" type="time">
+        </div>
+        <button class="btn btn-outline" onclick="addReminder()">+ Thêm nhắc nhở</button>
+      </div>
+
+      <div class="card">
+        <h3>Theo dõi chỉ số sức khỏe <span id="vitals-member-label" style="font-weight:400;color:var(--ink-soft);font-size:13px;"></span></h3>
+        <svg id="vitals-svg" class="vitals-chart" viewBox="0 0 300 120"></svg>
+        <div class="grid-2">
+          <input id="vital-bp" placeholder="Huyết áp (VD: 120/80)">
+          <input id="vital-hr" type="number" placeholder="Nhịp tim (bpm)">
+        </div>
+        <input id="vital-sugar" type="number" placeholder="Đường huyết (mg/dL, không bắt buộc)">
+        <button class="btn btn-outline" onclick="addVital()">+ Ghi nhận hôm nay</button>
+        <div id="vital-alert-box" style="display:none;margin-top:10px;"></div>
+        <button class="btn btn-primary" style="margin-top:10px;width:100%;" onclick="askAiInsight()">🤖 Hỏi AI phân tích hồ sơ này</button>
+        <div id="ai-insight-box" style="display:none;margin-top:12px;padding:12px 14px;background:var(--blue-light);border-radius:var(--radius-sm);font-size:13.5px;line-height:1.5;color:var(--ink);"></div>
+      </div>
+    </div>
+
+    <div class="card connect-card" style="margin-top:22px;">
+      <h3 style="color:var(--navy);">🏥 Kết nối cơ sở y tế</h3>
+      <p style="color:var(--ink-soft);font-size:14px;margin-top:0;">Dành cho yêu cầu vật tư, thuốc men, hoặc phối hợp phương án trong trường hợp khẩn cấp với Trung tâm Y tế Côn Đảo.</p>
+      <div class="grid-2">
+        <select id="connect-type">
+          <option>Xin cấp vật tư y tế</option>
+          <option>Xin cấp thuốc</option>
+          <option>Phối hợp phương án khẩn cấp</option>
+        </select>
+        <input id="connect-note" placeholder="Ghi chú thêm (không bắt buộc)">
+      </div>
+      <button class="btn btn-primary" onclick="sendConnectRequest()">Gửi yêu cầu đến Trung tâm Y tế</button>
+      <div id="connect-status" class="status-tag" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CHATBOT -->
+<div id="panel-chat" class="panel">
+  <div class="panel-hero"><h2>Trợ Lý AI</h2><p>Tư vấn sơ bộ dựa trên hồ sơ sức khỏe — không thay thế bác sĩ chuyên môn.</p></div>
+  <div class="wrap panel-body">
+    <div class="chat-shell">
+      <div class="chat-side">
+        <h3>Kết nối nhanh</h3>
+        <p>Chọn khi cần hỗ trợ ngay thay vì chat thông thường.</p>
+        <button class="quick-btn emergency" onclick="handleEmergency()">🚨 Trường hợp khẩn cấp</button>
+        <button class="quick-btn" onclick="handleSpecialist()">🩺 Cần gặp bác sĩ chuyên khoa</button>
+        <button class="quick-btn" onclick="askPreset('Tôi nên làm gì khi bị sốt nhẹ ở đảo xa đất liền?')">Câu hỏi thường gặp: Sốt nhẹ</button>
+        <button class="quick-btn" onclick="askPreset('Lịch tiêm phòng cho trẻ nhỏ nên theo dõi như thế nào?')">Câu hỏi thường gặp: Tiêm phòng</button>
+        <div class="drag-tip">💡 Giữ và kéo biểu tượng <b>⠿</b> cạnh mỗi tin nhắn để sắp xếp lại thứ tự hội thoại.</div>
+      </div>
+      <div class="chat-main">
+        <div id="chat-log" class="chat-log"></div>
+        <div class="chat-input">
+          <input id="chat-text" placeholder="Nhập câu hỏi về sức khỏe..." onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="send-btn" onclick="sendChat()">Gửi</button>
+        </div>
+      </div>
+    </div>
+    <div class="disclaimer">⚠️ Trợ lý AI chỉ mang tính chất tham khảo, không thay thế chẩn đoán hoặc điều trị từ bác sĩ chuyên môn. Trong trường hợp khẩn cấp, hệ thống sẽ kết nối trực tiếp đến cơ sở y tế hoặc chính quyền địa phương thay vì tiếp tục tư vấn.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="panel-admin" class="panel">
+  <div class="panel-hero"><h2>Quản Trị Hệ Thống</h2><p>Duyệt tài khoản, phân quyền, khóa/mở tài khoản người dùng.</p></div>
+  <div class="wrap panel-body">
+    <div class="card">
+      <h3>Danh sách tài khoản</h3>
+      <table class="data-table" id="admin-users-table">
+        <thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+        <tbody id="admin-users-body"></tbody>
+      </table>
+    </div>
+    <div class="card" style="margin-top:22px;">
+      <h3>Đề nghị cung cấp vật tư (từ nhân viên y tế)</h3>
+      <table class="data-table">
+        <thead><tr><th>Nhân viên</th><th>Vật tư/Thuốc</th><th>Số lượng</th><th>Lý do</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+        <tbody id="admin-proposals-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MEDICAL STAFF -->
+<div id="panel-medical" class="panel">
+  <div class="panel-hero"><h2>Bảng Điều Khiển Nhân Viên Y Tế</h2><p>Tiếp nhận yêu cầu/phản ánh từ người dân và đề nghị cung cấp vật tư.</p></div>
+  <div class="wrap panel-body">
+
+    <div class="card" style="border:2px solid #E0342B;margin-bottom:22px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+        <h3 style="color:#E0342B;margin:0;">🚨 Báo động SOS khẩn cấp</h3>
+        <button id="sos-sound-toggle" class="btn btn-outline" style="padding:6px 12px;font-size:13px;" onclick="enableSosSound()">🔔 Bật âm thanh cảnh báo</button>
+      </div>
+      <div id="sos-alerts-panel" style="margin-top:12px;"><p style="color:#9AAAA6;font-size:13px;">Đang tải...</p></div>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="color:var(--navy);margin-bottom:16px;">Yêu cầu &amp; phản ánh từ người dân</h3>
+        <div id="medical-requests-list"></div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>Đề nghị cung cấp vật tư</h3>
+          <label>Tên vật tư/thuốc</label>
+          <input id="supply-item" placeholder="VD: Khẩu trang y tế, Paracetamol...">
+          <label>Số lượng</label>
+          <input id="supply-qty" placeholder="VD: 200 hộp">
+          <label>Lý do đề nghị</label>
+          <textarea id="supply-reason" rows="2" placeholder="VD: Sắp hết tồn kho, chuẩn bị mùa dịch..."></textarea>
+          <button class="btn btn-primary" onclick="submitSupplyProposal()">Gửi đề nghị</button>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h3>Đề nghị đã gửi</h3>
+          <div id="staff-proposals-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  Đề tài minh họa — Ứng dụng AI hỗ trợ cảnh báo sức khỏe &amp; kết nối y tế từ xa cho cộng đồng dân cư Côn Đảo<br>
+  <a id="github-link" href="" target="_blank"></a>
+  <!-- ⚠️ Thay "TEN-CUA-BAN/hai-dang-suc-khoe" ở trên bằng đường dẫn repo GitHub thật của bạn sau khi tạo xong (xem hướng dẫn trong README.md) -->
+</div>
+
+<!-- ================= SOS KHẨN CẤP ================= -->
+<button id="sos-fab" onclick="openSosConfirm()" style="display:none;position:fixed;right:22px;bottom:22px;z-index:9000;width:66px;height:66px;border-radius:50%;background:#E0342B;color:#fff;border:none;box-shadow:0 6px 20px rgba(224,52,43,.5);font-weight:800;font-size:14px;letter-spacing:.5px;cursor:pointer;animation:sosPulse 2s infinite;align-items:center;justify-content:center;">SOS</button>
+<style>@keyframes sosPulse{0%{box-shadow:0 0 0 0 rgba(224,52,43,.55);}70%{box-shadow:0 0 0 16px rgba(224,52,43,0);}100%{box-shadow:0 0 0 0 rgba(224,52,43,0);}}</style>
+
+<div id="sos-confirm-backdrop" class="modal-backdrop" style="display:none;position:fixed;inset:0;background:rgba(20,20,20,.55);z-index:9500;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:380px;margin:16px;">
+    <h3 style="color:#E0342B;">🚨 Gửi báo động khẩn cấp?</h3>
+    <p style="font-size:14px;color:var(--ink-soft);">Trung tâm Y tế Côn Đảo sẽ nhận vị trí GPS của bạn ngay lập tức và gọi lại để xác nhận cử xe cấp cứu.</p>
+    <label>Số điện thoại để nhân viên y tế gọi lại</label>
+    <input id="sos-phone" placeholder="09xx xxx xxx">
+    <label>Ghi chú (không bắt buộc)</label>
+    <input id="sos-note" placeholder="VD: Khó thở, ngã cầu thang...">
+    <div id="sos-confirm-error" style="display:none;color:#E0342B;font-size:13px;margin-top:6px;"></div>
+    <div style="display:flex;gap:10px;margin-top:14px;">
+      <button class="btn btn-outline" style="flex:1;" onclick="closeSosConfirm()">Hủy</button>
+      <button class="btn btn-primary" style="flex:1;background:#E0342B;border-color:#E0342B;" onclick="triggerSos()">🚨 Gửi SOS ngay</button>
+    </div>
+  </div>
+</div>
+
+<div id="sos-active-backdrop" style="display:none;position:fixed;inset:0;background:rgba(20,20,20,.65);z-index:9500;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:380px;margin:16px;text-align:center;">
+    <div id="sos-active-icon" style="font-size:40px;">🚨</div>
+    <h3 id="sos-active-title" style="color:#E0342B;">Đã gửi báo động SOS</h3>
+    <p id="sos-active-desc" style="font-size:14px;color:var(--ink-soft);">Đang chờ nhân viên y tế xác nhận và gọi lại cho bạn. Vị trí của bạn đang được cập nhật liên tục.</p>
+    <p id="sos-active-confirmed" style="display:none;font-size:14px;color:#2E9B5C;font-weight:600;"></p>
+    <button class="btn btn-outline" onclick="resolveSos()">✓ Tôi đã an toàn / hủy báo động</button>
+  </div>
+</div>
+
+<script>
+// ⚠️ Sau khi deploy proxy-server (xem README), thay URL bên dưới bằng URL server thật của bạn.
+const API_BASE_URL = 'https://haidang-yfag.onrender.com';
+const CHAT_API_URL = API_BASE_URL + '/api/chat';
+
+// ---------- Auth state ----------
+let authToken = localStorage.getItem('hd_token') || null;
+let currentUser = null;
+
+async function apiFetch(path, opts={}){
+  const headers = Object.assign({'Content-Type':'application/json'}, opts.headers||{});
+  if(authToken) headers['Authorization'] = 'Bearer ' + authToken;
+  const res = await fetch(API_BASE_URL + path, Object.assign({}, opts, { headers }));
+  const data = await res.json().catch(()=>({}));
+  if(!res.ok) throw new Error(data.error || 'Đã xảy ra lỗi, vui lòng thử lại.');
+  return data;
+}
+
+function openAuthModal(mode){
+  document.getElementById('auth-modal-backdrop').style.display='flex';
+  setAuthMode(mode||'login');
+}
+function closeAuthModal(){
+  document.getElementById('auth-modal-backdrop').style.display='none';
+  document.getElementById('auth-error').style.display='none';
+}
+function setAuthMode(mode){
+  const isLogin = mode==='login';
+  document.getElementById('auth-tab-login').classList.toggle('active', isLogin);
+  document.getElementById('auth-tab-register').classList.toggle('active', !isLogin);
+  document.getElementById('login-form').style.display = isLogin ? 'block':'none';
+  document.getElementById('register-form').style.display = isLogin ? 'none':'block';
+  document.getElementById('auth-error').style.display='none';
+}
+document.getElementById('reg-role').addEventListener('change', e=>{
+  document.getElementById('reg-medical-note').style.display = e.target.value==='medical' ? 'block':'none';
+});
+function showAuthError(msg){
+  const el = document.getElementById('auth-error');
+  el.textContent = msg;
+  el.style.display='block';
+}
+
+async function handleLogin(e){
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+  try{
+    const data = await apiFetch('/api/auth/login', { method:'POST', body: JSON.stringify({email,password}) });
+    authToken = data.token;
+    currentUser = data.user;
+    localStorage.setItem('hd_token', authToken);
+    closeAuthModal();
+    renderAuthUI();
+    switchTab(currentUser.role==='citizen' ? 'home' : currentUser.role);
+  }catch(err){ showAuthError(err.message); }
+  return false;
+}
+
+async function handleRegister(e){
+  e.preventDefault();
+  const name = document.getElementById('reg-name').value;
+  const email = document.getElementById('reg-email').value;
+  const password = document.getElementById('reg-password').value;
+  const role = document.getElementById('reg-role').value;
+  try{
+    const data = await apiFetch('/api/auth/register', { method:'POST', body: JSON.stringify({name,email,password,role}) });
+    if(data.pending){
+      showAuthError('✓ ' + data.message);
+      return false;
+    }
+    authToken = data.token;
+    currentUser = data.user;
+    localStorage.setItem('hd_token', authToken);
+    closeAuthModal();
+    renderAuthUI();
+  }catch(err){ showAuthError(err.message); }
+  return false;
+}
+
+function logout(){
+  authToken = null;
+  currentUser = null;
+  localStorage.removeItem('hd_token');
+  renderAuthUI();
+  switchTab('home');
+}
+
+const ROLE_LABEL = { admin:'Quản trị viên', citizen:'Người dân', medical:'Nhân viên y tế' };
+
+function renderAuthUI(){
+  const loggedIn = !!currentUser;
+  document.getElementById('auth-login-btn').style.display = loggedIn ? 'none':'inline-flex';
+  document.getElementById('auth-user-box').style.display = loggedIn ? 'flex':'none';
+  if(loggedIn){
+    document.getElementById('auth-user-name').textContent = currentUser.name;
+    document.getElementById('auth-user-role').textContent = ROLE_LABEL[currentUser.role] || currentUser.role;
+  }
+  ['citizen','medical','admin'].forEach(role=>{
+    document.querySelectorAll('.role-'+role).forEach(btn=>{
+      btn.style.display = (loggedIn && currentUser.role===role) ? 'inline-block' : 'none';
+    });
+  });
+  if(loggedIn && currentUser.role==='admin') loadAdminPanel();
+  if(loggedIn && currentUser.role==='medical') loadMedicalPanel();
+  if(loggedIn && currentUser.role==='citizen') loadFamily();
+  document.getElementById('sos-fab').style.display = (loggedIn && currentUser.role==='citizen') ? 'flex' : 'none';
+  if(loggedIn && currentUser.role==='citizen') checkMySosStatus();
+  if(loggedIn && (currentUser.role==='medical'||currentUser.role==='admin')) startSosPolling();
+  else stopSosPolling();
+}
+
+async function restoreSession(){
+  if(!authToken) { renderAuthUI(); return; }
+  try{
+    const data = await apiFetch('/api/auth/me');
+    currentUser = data.user;
+  }catch(e){
+    authToken = null; currentUser = null;
+    localStorage.removeItem('hd_token');
+  }
+  renderAuthUI();
+}
+restoreSession();
+
+// ---------- Tabs ----------
+const PROTECTED_TABS = { profile:'citizen', care:'citizen', chat:'citizen', medical:'medical', admin:'admin' };
+function switchTab(name){
+  const requiredRole = PROTECTED_TABS[name];
+  if(requiredRole && (!currentUser || currentUser.role!==requiredRole)){
+    openAuthModal('login');
+    return;
+  }
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  const btn = document.querySelector(`.tab-btn[data-tab="${name}"]`);
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+// ---------- State ----------
+let reminders = [
+  {text:'Uống thuốc huyết áp', time:'07:00', done:false},
+  {text:'Đo huyết áp buổi tối', time:'20:00', done:false}
+];
+let familyMembers = [];
+let selectedMemberId = null;
+
+function selectedMember(){ return familyMembers.find(m=>m.id===selectedMemberId) || null; }
+
+async function loadFamily(){
+  try{
+    const data = await apiFetch('/api/family');
+    familyMembers = data.members || [];
+    if(!familyMembers.some(m=>m.id===selectedMemberId)){
+      selectedMemberId = familyMembers.length ? familyMembers[0].id : null;
+    }
+    renderFamilyTabs();
+    renderMemberDetail();
+  }catch(err){ console.error('Không tải được hồ sơ gia đình:', err.message); }
+}
+
+function renderFamilyTabs(){
+  const wrap = document.getElementById('family-tabs');
+  wrap.innerHTML = familyMembers.map(m=>
+    `<button class="btn ${m.id===selectedMemberId?'btn-primary':'btn-outline'}" style="padding:8px 14px;font-size:13px;" onclick="selectMember('${m.id}')">${m.name}${m.relationship?' · '+m.relationship:''}</button>`
+  ).join('');
+}
+function selectMember(id){ selectedMemberId=id; renderFamilyTabs(); renderMemberDetail(); }
+
+async function addFamilyMember(){
+  const name = document.getElementById('fam-new-name').value.trim();
+  const relationship = document.getElementById('fam-new-relationship').value;
+  if(!name) return;
+  try{
+    const data = await apiFetch('/api/family', { method:'POST', body: JSON.stringify({name, relationship}) });
+    document.getElementById('fam-new-name').value='';
+    document.getElementById('fam-new-relationship').value='';
+    await loadFamily();
+    selectMember(data.member.id);
+  }catch(err){ alert('Không thêm được thành viên: ' + err.message); }
+}
+
+async function deleteFamilyMember(){
+  const m = selectedMember();
+  if(!m) return;
+  if(!confirm(`Xóa hồ sơ của "${m.name}"? Không thể hoàn tác.`)) return;
+  try{
+    await apiFetch('/api/family/'+m.id, { method:'DELETE' });
+    selectedMemberId = null;
+    await loadFamily();
+  }catch(err){ alert('Không xóa được: ' + err.message); }
+}
+
+function renderMemberDetail(){
+  const m = selectedMember();
+  document.getElementById('family-empty').style.display = familyMembers.length ? 'none' : 'block';
+  document.getElementById('family-detail').style.display = m ? 'block' : 'none';
+  if(!m) return;
+  document.getElementById('p-name').value = m.name || '';
+  document.getElementById('p-dob').value = m.dob || '';
+  document.getElementById('p-gender').value = m.gender || 'Nam';
+  document.getElementById('p-relationship').value = m.relationship || '';
+  document.getElementById('p-history').value = m.history || '';
+  document.getElementById('profile-saved').style.display = 'none';
+  renderExams(); renderMeds(); renderMemberAlerts();
+  document.getElementById('vitals-member-label').textContent = '— ' + m.name;
+  renderVitals();
+  document.getElementById('ai-insight-box').style.display = 'none';
+  document.getElementById('vital-alert-box').style.display = 'none';
+}
+
+async function saveProfile(){
+  const m = selectedMember();
+  if(!m) return;
+  const payload = {
+    name: document.getElementById('p-name').value,
+    dob: document.getElementById('p-dob').value,
+    gender: document.getElementById('p-gender').value,
+    relationship: document.getElementById('p-relationship').value,
+    history: document.getElementById('p-history').value,
+  };
+  try{
+    const data = await apiFetch('/api/family/'+m.id, { method:'PATCH', body: JSON.stringify(payload) });
+    Object.assign(m, data.member);
+    renderFamilyTabs();
+    document.getElementById('profile-saved').style.display='inline-flex';
+  }catch(err){ alert('Không lưu được: ' + err.message); }
+}
+
+function renderExams(){
+  const m = selectedMember();
+  const el = document.getElementById('exam-list');
+  const exams = m ? m.exams : [];
+  el.innerHTML = exams.length ? '' : '<p style="color:#9AAAA6;font-size:13px;">Chưa có lịch sử khám.</p>';
+  exams.forEach(e=>{
+    el.innerHTML += `<div class="list-row"><div><b style="font-size:13px;">${e.date||'—'}</b> · ${e.place}<br><span style="color:var(--ink-soft);font-size:13px;">${e.note||''}</span></div><button class="icon-btn" onclick="removeExam('${e.id}')">✕</button></div>`;
+  });
+}
+async function addExam(){
+  const m = selectedMember(); if(!m) return;
+  const date=document.getElementById('exam-date').value;
+  const place=document.getElementById('exam-place').value;
+  const note=document.getElementById('exam-note').value;
+  if(!place) return;
+  try{
+    const data = await apiFetch('/api/family/'+m.id+'/exams', { method:'POST', body: JSON.stringify({date,place,note}) });
+    m.exams.push(data.exam);
+    document.getElementById('exam-place').value=''; document.getElementById('exam-note').value='';
+    renderExams();
+  }catch(err){ alert('Không thêm được: ' + err.message); }
+}
+async function removeExam(examId){
+  const m = selectedMember(); if(!m) return;
+  try{
+    await apiFetch('/api/family/'+m.id+'/exams/'+examId, { method:'DELETE' });
+    m.exams = m.exams.filter(e=>e.id!==examId);
+    renderExams();
+  }catch(err){ alert('Không xóa được: ' + err.message); }
+}
+
+function renderMeds(){
+  const m = selectedMember();
+  const el = document.getElementById('med-list');
+  const meds = m ? m.meds : [];
+  el.innerHTML = meds.length ? '' : '<p style="color:#9AAAA6;font-size:13px;">Chưa có thuốc nào.</p>';
+  meds.forEach(md=>{
+    el.innerHTML += `<div class="list-row"><div><b style="font-size:13px;">${md.name}</b><br><span style="color:var(--ink-soft);font-size:13px;">${md.schedule||''}</span></div><button class="icon-btn" onclick="removeMed('${md.id}')">✕</button></div>`;
+  });
+}
+async function addMed(){
+  const m = selectedMember(); if(!m) return;
+  const name=document.getElementById('med-name').value;
+  const schedule=document.getElementById('med-schedule').value;
+  if(!name) return;
+  try{
+    const data = await apiFetch('/api/family/'+m.id+'/meds', { method:'POST', body: JSON.stringify({name,schedule}) });
+    m.meds.push(data.med);
+    document.getElementById('med-name').value=''; document.getElementById('med-schedule').value='';
+    renderMeds();
+  }catch(err){ alert('Không thêm được: ' + err.message); }
+}
+async function removeMed(medId){
+  const m = selectedMember(); if(!m) return;
+  try{
+    await apiFetch('/api/family/'+m.id+'/meds/'+medId, { method:'DELETE' });
+    m.meds = m.meds.filter(x=>x.id!==medId);
+    renderMeds();
+  }catch(err){ alert('Không xóa được: ' + err.message); }
+}
+
+function renderReminders(){
+  const el = document.getElementById('reminder-list');
+  el.innerHTML='';
+  reminders.forEach((r,i)=>{
+    el.innerHTML += `<div class="reminder"><div class="check ${r.done?'done':''}" onclick="toggleReminder(${i})">${r.done?'✓':''}</div><div class="txt ${r.done?'done':''}" style="flex:1;">${r.text}</div><span class="pill">${r.time}</span></div>`;
+  });
+}
+function toggleReminder(i){reminders[i].done=!reminders[i].done;renderReminders();}
+function addReminder(){
+  const text=document.getElementById('rem-text').value;
+  const time=document.getElementById('rem-time').value || '--:--';
+  if(!text) return;
+  reminders.push({text,time,done:false});
+  document.getElementById('rem-text').value='';
+  renderReminders();
+}
+
+const ALERT_BG = { cao:'#FFEAEA', canh_bao:'#FFF6E0' };
+const ALERT_BORDER = { cao:'#E0342B', canh_bao:'#E0A030' };
+
+function checkVitalAlertsClient(v){
+  const alerts=[];
+  if(v.bp){
+    const mm=String(v.bp).match(/(\d+)\s*\/\s*(\d+)/);
+    if(mm){
+      const sys=parseInt(mm[1],10), dia=parseInt(mm[2],10);
+      if(sys>=140||dia>=90) alerts.push({level:'cao', message:`Huyết áp cao (${v.bp} mmHg)`});
+      else if(sys>0 && sys<90) alerts.push({level:'canh_bao', message:`Huyết áp thấp (${v.bp} mmHg)`});
+    }
+  }
+  if(v.hr){
+    const hr=Number(v.hr);
+    if(hr>100) alerts.push({level:'canh_bao', message:`Nhịp tim nhanh (${hr} bpm)`});
+    else if(hr>0 && hr<60) alerts.push({level:'canh_bao', message:`Nhịp tim chậm (${hr} bpm)`});
+  }
+  if(v.sugar){
+    const s=Number(v.sugar);
+    if(s>=126) alerts.push({level:'cao', message:`Đường huyết cao (${s} mg/dL)`});
+    else if(s>0 && s<70) alerts.push({level:'cao', message:`Đường huyết thấp (${s} mg/dL)`});
+  }
+  return alerts;
+}
+
+function renderMemberAlerts(){
+  const m = selectedMember();
+  const box = document.getElementById('member-alerts');
+  if(!m || !m.vitals.length){ box.innerHTML=''; return; }
+  const alerts = checkVitalAlertsClient(m.vitals[m.vitals.length-1]);
+  box.innerHTML = alerts.map(a=>
+    `<div style="background:${ALERT_BG[a.level]};border-left:4px solid ${ALERT_BORDER[a.level]};padding:10px 14px;border-radius:8px;margin-bottom:8px;font-size:13.5px;">⚠️ ${a.message}</div>`
+  ).join('');
+}
+
+function renderVitals(){
+  const m = selectedMember();
+  const svg=document.getElementById('vitals-svg');
+  const hrSeries = m ? m.vitals.map(v=>Number(v.hr)).filter(v=>v>0) : [];
+  if(!hrSeries.length){ svg.innerHTML=''; return; }
+  const max=Math.max(...hrSeries), min=Math.min(...hrSeries);
+  const pts=hrSeries.map((v,i)=>{
+    const x=10 + i*(280/Math.max(hrSeries.length-1,1));
+    const y=110 - ((v-min)/(max-min||1))*90;
+    return `${x},${y}`;
+  }).join(' ');
+  svg.innerHTML=`
+    <polyline points="${pts}" fill="none" stroke="#2F6FE0" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    ${hrSeries.map((v,i)=>{
+      const x=10 + i*(280/Math.max(hrSeries.length-1,1));
+      const y=110 - ((v-min)/(max-min||1))*90;
+      return `<circle cx="${x}" cy="${y}" r="3.5" fill="#FF6B4A"/>`;
+    }).join('')}
+  `;
+}
+
+async function addVital(){
+  const m = selectedMember();
+  if(!m){ alert('Vui lòng chọn hoặc thêm thành viên trước.'); return; }
+  const bp=document.getElementById('vital-bp').value;
+  const hr=document.getElementById('vital-hr').value;
+  const sugar=document.getElementById('vital-sugar').value;
+  if(!bp && !hr && !sugar) return;
+  try{
+    const data = await apiFetch('/api/family/'+m.id+'/vitals', { method:'POST', body: JSON.stringify({bp,hr,sugar}) });
+    m.vitals.push(data.vital);
+    document.getElementById('vital-bp').value=''; document.getElementById('vital-hr').value=''; document.getElementById('vital-sugar').value='';
+    renderVitals(); renderMemberAlerts();
+    const box = document.getElementById('vital-alert-box');
+    box.style.display='block';
+    box.innerHTML = data.alerts && data.alerts.length
+      ? data.alerts.map(a=>`<div style="color:#B23B2E;font-size:13px;">⚠️ ${a.message}</div>`).join('')
+      : `<div style="color:#2E9B5C;font-size:13px;">✓ Chỉ số trong ngưỡng bình thường</div>`;
+  }catch(err){ alert('Không ghi nhận được: ' + err.message); }
+}
+
+async function askAiInsight(){
+  const m = selectedMember();
+  if(!m){ alert('Vui lòng chọn thành viên trước.'); return; }
+  const box = document.getElementById('ai-insight-box');
+  box.style.display='block';
+  box.innerHTML = 'Đang phân tích...';
+  try{
+    const data = await apiFetch('/api/family/'+m.id+'/ai-insight', { method:'POST' });
+    box.innerHTML = `<b>🤖 Nhận định AI:</b><br>${data.insight.replace(/\n/g,'<br>')}`;
+  }catch(err){ box.innerHTML = `⚠ Không thể phân tích: ${err.message}`; }
+}
+
+async function sendConnectRequest(){
+  if(!currentUser || currentUser.role!=='citizen'){
+    openAuthModal('login');
+    return;
+  }
+  const type=document.getElementById('connect-type').value;
+  const note=document.getElementById('connect-note').value;
+  const tag=document.getElementById('connect-status');
+  try{
+    await apiFetch('/api/requests', { method:'POST', body: JSON.stringify({type, note}) });
+    tag.style.display='inline-flex';
+    tag.innerHTML = `✓ Đã gửi "${type}" đến nhân viên y tế trực — vui lòng chờ phản hồi`;
+    document.getElementById('connect-note').value='';
+  }catch(err){
+    tag.style.display='inline-flex';
+    tag.innerHTML = `⚠ Gửi thất bại: ${err.message}`;
+  }
+}
+
+// ---------- Admin panel ----------
+async function loadAdminPanel(){
+  try{
+    const { users } = await apiFetch('/api/admin/users');
+    const body = document.getElementById('admin-users-body');
+    body.innerHTML = users.map(u => `
+      <tr>
+        <td>${u.name}</td>
+        <td>${u.email}</td>
+        <td>
+          <select onchange="updateUser('${u.id}',{role:this.value})" ${u.role==='admin'?'disabled':''}>
+            <option value="citizen" ${u.role==='citizen'?'selected':''}>Người dân</option>
+            <option value="medical" ${u.role==='medical'?'selected':''}>Nhân viên y tế</option>
+            <option value="admin" ${u.role==='admin'?'selected':''}>Quản trị viên</option>
+          </select>
+        </td>
+        <td><span class="status-pill ${u.status}">${u.status==='active'?'Hoạt động':u.status==='pending'?'Chờ duyệt':'Đã khóa'}</span></td>
+        <td>
+          ${u.role==='admin' ? '—' : u.status==='blocked'
+            ? `<button class="small-btn approve" onclick="updateUser('${u.id}',{status:'active'})">Mở khóa</button>`
+            : `<button class="small-btn approve" onclick="updateUser('${u.id}',{status:'active'})">Duyệt</button>
+               <button class="small-btn block" onclick="updateUser('${u.id}',{status:'blocked'})">Khóa</button>`
+          }
+        </td>
+      </tr>`).join('');
+  }catch(err){ console.error(err); }
+
+  try{
+    const { proposals } = await apiFetch('/api/supply-proposals');
+    const body = document.getElementById('admin-proposals-body');
+    body.innerHTML = proposals.length ? proposals.map(p => `
+      <tr>
+        <td>${p.staffName}</td>
+        <td>${p.item}</td>
+        <td>${p.quantity||'—'}</td>
+        <td>${p.reason||'—'}</td>
+        <td><span class="status-pill ${p.status}">${p.status==='cho_duyet'?'Chờ duyệt':p.status==='da_duyet'?'Đã duyệt':'Từ chối'}</span></td>
+        <td>${p.status==='cho_duyet'
+          ? `<button class="small-btn approve" onclick="updateProposal('${p.id}','da_duyet')">Duyệt</button>
+             <button class="small-btn block" onclick="updateProposal('${p.id}','tu_choi')">Từ chối</button>`
+          : '—'}</td>
+      </tr>`).join('') : '<tr><td colspan="6" style="color:#9AAAA6;">Chưa có đề nghị nào.</td></tr>';
+  }catch(err){ console.error(err); }
+}
+async function updateUser(id, patch){
+  try{ await apiFetch('/api/admin/users/'+id, { method:'PATCH', body: JSON.stringify(patch) }); loadAdminPanel(); }
+  catch(err){ alert(err.message); }
+}
+async function updateProposal(id, status){
+  try{ await apiFetch('/api/supply-proposals/'+id, { method:'PATCH', body: JSON.stringify({status}) }); loadAdminPanel(); }
+  catch(err){ alert(err.message); }
+}
+
+// ---------- SOS khẩn cấp ----------
+let sosWatchId = null;
+let sosMyPollTimer = null;
+let sosStaffPollTimer = null;
+let activeSosAlert = null;
+
+function openSosConfirm(){
+  document.getElementById('sos-phone').value = (currentUser && currentUser.phone) || '';
+  document.getElementById('sos-note').value = '';
+  document.getElementById('sos-confirm-error').style.display='none';
+  document.getElementById('sos-confirm-backdrop').style.display='flex';
+}
+function closeSosConfirm(){
+  document.getElementById('sos-confirm-backdrop').style.display='none';
+}
+function showSosError(msg){
+  const el = document.getElementById('sos-confirm-error');
+  el.textContent = msg; el.style.display='block';
+}
+
+function triggerSos(){
+  if(!navigator.geolocation){
+    showSosError('Trình duyệt không hỗ trợ định vị GPS.');
+    return;
+  }
+  const phone = document.getElementById('sos-phone').value.trim();
+  const note = document.getElementById('sos-note').value.trim();
+  if(!phone){ showSosError('Vui lòng nhập số điện thoại để nhân viên y tế gọi lại.'); return; }
+
+  navigator.geolocation.getCurrentPosition(async (pos)=>{
+    try{
+      const { latitude, longitude } = pos.coords;
+      const data = await apiFetch('/api/sos', { method:'POST', body: JSON.stringify({ lat: latitude, lng: longitude, phone, note }) });
+      activeSosAlert = data.alert;
+      closeSosConfirm();
+      showSosActive();
+      startSosLocationWatch();
+      startMySosPolling();
+    }catch(err){ showSosError('Gửi SOS thất bại: ' + err.message); }
+  }, (err)=>{
+    showSosError('Không lấy được vị trí GPS: ' + err.message + '. Hãy bật quyền truy cập vị trí cho trang web.');
+  }, { enableHighAccuracy:true, timeout:10000 });
+}
+
+function startSosLocationWatch(){
+  if(!navigator.geolocation || sosWatchId!==null) return;
+  sosWatchId = navigator.geolocation.watchPosition(async (pos)=>{
+    if(!activeSosAlert) return;
+    try{
+      await apiFetch('/api/sos/'+activeSosAlert.id+'/location', {
+        method:'PATCH',
+        body: JSON.stringify({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+      });
+    }catch(err){ /* im lặng, sẽ thử lại ở lần cập nhật vị trí tiếp theo */ }
+  }, ()=>{}, { enableHighAccuracy:true, maximumAge:5000 });
+}
+function stopSosLocationWatch(){
+  if(sosWatchId!==null){ navigator.geolocation.clearWatch(sosWatchId); sosWatchId=null; }
+}
+
+function showSosActive(){
+  document.getElementById('sos-active-backdrop').style.display='flex';
+  document.getElementById('sos-active-confirmed').style.display='none';
+  document.getElementById('sos-active-title').textContent = 'Đã gửi báo động SOS';
+  document.getElementById('sos-active-desc').textContent = 'Đang chờ nhân viên y tế xác nhận và gọi lại cho bạn. Vị trí của bạn đang được cập nhật liên tục.';
+}
+function hideSosActive(){
+  document.getElementById('sos-active-backdrop').style.display='none';
+}
+
+function startMySosPolling(){
+  if(sosMyPollTimer) return;
+  sosMyPollTimer = setInterval(checkMySosStatus, 4000);
+}
+function stopMySosPolling(){
+  if(sosMyPollTimer){ clearInterval(sosMyPollTimer); sosMyPollTimer=null; }
+}
+
+async function checkMySosStatus(){
+  if(!currentUser || currentUser.role!=='citizen') return;
+  try{
+    const { alert } = await apiFetch('/api/sos/mine');
+    if(!alert){
+      activeSosAlert = null;
+      hideSosActive();
+      stopMySosPolling();
+      stopSosLocationWatch();
+      return;
+    }
+    activeSosAlert = alert;
+    showSosActive();
+    startSosLocationWatch();
+    startMySosPolling();
+    if(alert.status==='confirmed'){
+      document.getElementById('sos-active-title').textContent = '✓ Đã được xác nhận';
+      document.getElementById('sos-active-desc').textContent = 'Nhân viên y tế đã tiếp nhận và đang gọi điện xác nhận với bạn. Xe cấp cứu sẽ được điều tới vị trí của bạn.';
+      const c = document.getElementById('sos-active-confirmed');
+      c.style.display='block';
+      c.textContent = alert.confirmedBy ? `Tiếp nhận bởi: ${alert.confirmedBy}` : '';
+    }
+  }catch(err){ /* bỏ qua lỗi tạm thời khi poll */ }
+}
+
+async function resolveSos(){
+  if(!activeSosAlert) { hideSosActive(); return; }
+  if(!confirm('Xác nhận bạn đã an toàn và muốn đóng báo động SOS này?')) return;
+  try{
+    await apiFetch('/api/sos/'+activeSosAlert.id+'/resolve', { method:'PATCH' });
+  }catch(err){ /* vẫn đóng UI dù lỗi mạng */ }
+  activeSosAlert = null;
+  stopMySosPolling();
+  stopSosLocationWatch();
+  hideSosActive();
+}
+
+// -- Âm thanh cảnh báo khi có SOS mới --
+let sosAudioCtx = null;
+let sosSoundEnabled = false;
+let sosKnownActiveIds = new Set();
+
+function enableSosSound(){
+  try{
+    sosAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    sosSoundEnabled = true;
+    const btn = document.getElementById('sos-sound-toggle');
+    btn.textContent = '🔔 Âm thanh: đang bật';
+    btn.disabled = true;
+    playSosBeep(); // phát thử 1 lần để xác nhận đã bật
+  }catch(err){ console.error('Không bật được âm thanh:', err); }
+}
+
+function playSosBeep(){
+  if(!sosAudioCtx) return;
+  const times = [0, 0.35, 0.7]; // 3 tiếng "tút" liên tiếp
+  times.forEach(t=>{
+    const osc = sosAudioCtx.createOscillator();
+    const gain = sosAudioCtx.createGain();
+    osc.type = 'square';
+    osc.frequency.value = 880;
+    gain.gain.setValueAtTime(0.25, sosAudioCtx.currentTime + t);
+    gain.gain.exponentialRampToValueAtTime(0.001, sosAudioCtx.currentTime + t + 0.25);
+    osc.connect(gain); gain.connect(sosAudioCtx.destination);
+    osc.start(sosAudioCtx.currentTime + t);
+    osc.stop(sosAudioCtx.currentTime + t + 0.3);
+  });
+}
+
+// -- Phía nhân viên y tế / admin: xem & xác nhận các báo động SOS --
+function startSosPolling(){
+  if(sosStaffPollTimer) return;
+  loadSosAlertsForStaff();
+  sosStaffPollTimer = setInterval(loadSosAlertsForStaff, 5000);
+}
+function stopSosPolling(){
+  if(sosStaffPollTimer){ clearInterval(sosStaffPollTimer); sosStaffPollTimer=null; }
+}
+
+const SOS_STATUS_LABEL = { active:'🔴 Đang chờ xử lý', confirmed:'🟡 Đã xác nhận — chờ đóng ca', resolved:'✓ Đã xử lý xong' };
+
+async function loadSosAlertsForStaff(){
+  const el = document.getElementById('sos-alerts-panel');
+  if(!el) return; // panel chỉ tồn tại trong dashboard y tế
+  try{
+    const { alerts } = await apiFetch('/api/sos');
+    const active = alerts.filter(a=>a.status!=='resolved');
+
+    // Phát hiện báo động 'active' mới xuất hiện kể từ lần poll trước → kêu chuông
+    const currentActiveIds = new Set(active.filter(a=>a.status==='active').map(a=>a.id));
+    const newOnes = [...currentActiveIds].filter(id => !sosKnownActiveIds.has(id));
+    if(newOnes.length && sosSoundEnabled) playSosBeep();
+    sosKnownActiveIds = currentActiveIds;
+
+    if(!active.length){
+      el.innerHTML = '<p style="color:#9AAAA6;font-size:13px;">Không có báo động SOS nào đang chờ xử lý.</p>';
+      return;
+    }
+    el.innerHTML = active.map(a=>{
+      const mapUrl = `https://www.google.com/maps?q=${a.lat},${a.lng}`;
+      const telUrl = a.phone ? `tel:${a.phone.replace(/\s+/g,'')}` : null;
+      return `
+      <div class="request-card" style="border-left:4px solid ${a.status==='active'?'#E0342B':'#E0A030'};">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <b style="font-size:15px;">🚨 ${a.name}</b>
+          <span class="status-pill">${SOS_STATUS_LABEL[a.status]||a.status}</span>
+        </div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-bottom:8px;">
+          ${a.note ? a.note+'<br>' : ''}Cập nhật vị trí lần cuối: ${new Date(a.updatedAt).toLocaleTimeString('vi-VN')}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <a class="small-btn approve" style="text-decoration:none;display:inline-block;" href="${mapUrl}" target="_blank">📍 Xem trên bản đồ</a>
+          ${telUrl ? `<a class="small-btn approve" style="text-decoration:none;display:inline-block;" href="${telUrl}">📞 Gọi ${a.phone}</a>` : ''}
+          ${a.status==='active' ? `<button class="small-btn approve" onclick="setSosStatus('${a.id}','confirmed')">Đã gọi xác nhận</button>` : ''}
+          <button class="small-btn block" onclick="setSosStatus('${a.id}','resolved')">Đóng ca</button>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(err){ console.error('Không tải được danh sách SOS:', err.message); }
+}
+async function setSosStatus(id, status){
+  try{
+    await apiFetch('/api/sos/'+id+'/status', { method:'PATCH', body: JSON.stringify({status}) });
+    loadSosAlertsForStaff();
+  }catch(err){ alert(err.message); }
+}
+
+// ---------- Medical staff panel ----------
+const REQUEST_STATUS_LABEL = { moi:'Mới', dang_xu_ly:'Đang xử lý', da_xu_ly:'Đã xử lý' };
+async function loadMedicalPanel(){
+  try{
+    const { requests } = await apiFetch('/api/requests');
+    const el = document.getElementById('medical-requests-list');
+    el.innerHTML = requests.length ? requests.map(r => `
+      <div class="request-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <b style="font-size:14px;">${r.citizenName}</b>
+          <span class="status-pill ${r.status}">${REQUEST_STATUS_LABEL[r.status]}</span>
+        </div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-bottom:8px;">${r.type}${r.note ? ' — '+r.note : ''}</div>
+        <textarea id="resp-${r.id}" rows="2" placeholder="Nhập phản hồi cho người dân...">${r.response||''}</textarea>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <select id="stat-${r.id}">
+            <option value="moi" ${r.status==='moi'?'selected':''}>Mới</option>
+            <option value="dang_xu_ly" ${r.status==='dang_xu_ly'?'selected':''}>Đang xử lý</option>
+            <option value="da_xu_ly" ${r.status==='da_xu_ly'?'selected':''}>Đã xử lý</option>
+          </select>
+          <button class="small-btn approve" onclick="respondRequest('${r.id}')">Gửi phản hồi</button>
+        </div>
+      </div>`).join('') : '<p style="color:#9AAAA6;font-size:13px;">Chưa có yêu cầu nào.</p>';
+  }catch(err){ console.error(err); }
+
+  try{
+    const { proposals } = await apiFetch('/api/supply-proposals');
+    const mine = proposals.filter(p => p.staffId === currentUser.id);
+    const el = document.getElementById('staff-proposals-list');
+    el.innerHTML = mine.length ? mine.map(p => `
+      <div class="list-row"><div><b style="font-size:13px;">${p.item}</b> (${p.quantity||'—'})<br><span style="color:var(--ink-soft);font-size:13px;">${p.reason||''}</span></div>
+      <span class="status-pill ${p.status}">${p.status==='cho_duyet'?'Chờ duyệt':p.status==='da_duyet'?'Đã duyệt':'Từ chối'}</span></div>`).join('')
+      : '<p style="color:#9AAAA6;font-size:13px;">Bạn chưa gửi đề nghị nào.</p>';
+  }catch(err){ console.error(err); }
+}
+async function respondRequest(id){
+  const response = document.getElementById('resp-'+id).value;
+  const status = document.getElementById('stat-'+id).value;
+  try{ await apiFetch('/api/requests/'+id, { method:'PATCH', body: JSON.stringify({response, status}) }); loadMedicalPanel(); }
+  catch(err){ alert(err.message); }
+}
+async function submitSupplyProposal(){
+  const item = document.getElementById('supply-item').value;
+  const quantity = document.getElementById('supply-qty').value;
+  const reason = document.getElementById('supply-reason').value;
+  if(!item) return;
+  try{
+    await apiFetch('/api/supply-proposals', { method:'POST', body: JSON.stringify({item, quantity, reason}) });
+    document.getElementById('supply-item').value='';
+    document.getElementById('supply-qty').value='';
+    document.getElementById('supply-reason').value='';
+    loadMedicalPanel();
+  }catch(err){ alert(err.message); }
+}
+
+renderExams();renderMeds();renderReminders();renderVitals();
+
+// ---------- Chat (with drag-to-reorder messages) ----------
+const chatLog = document.getElementById('chat-log');
+let messages = [];       // {id, role:'user'|'assistant'|'system', content}
+let msgIdCounter = 0;
+const EMERGENCY_WORDS = ['cấp cứu','khó thở','đau ngực','bất tỉnh','chảy máu nhiều','ngã nặng','co giật','đột quỵ','tai nạn nặng'];
+
+function renderMarkdown(text){
+  const escaped = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const lines = escaped.split('\n');
+  let html = '';
+  let inList = false;
+  lines.forEach(line=>{
+    const trimmed = line.trim();
+    if(trimmed.startsWith('- ') || trimmed.startsWith('* ')){
+      if(!inList){ html += '<ul>'; inList = true; }
+      html += `<li>${trimmed.slice(2)}</li>`;
+    } else {
+      if(inList){ html += '</ul>'; inList = false; }
+      if(trimmed) html += `<p>${trimmed}</p>`;
+    }
+  });
+  if(inList) html += '</ul>';
+  html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  return html || `<p>${escaped}</p>`;
+}
+
+// -- Drag-to-reorder (Pointer Events, works with mouse & touch) --
+let dragState = null;
+function getDragAfterElement(container, y){
+  const els = [...container.querySelectorAll('.msg-wrap:not(.dragging)')];
+  return els.reduce((closest, child)=>{
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height/2;
+    if(offset < 0 && offset > closest.offset) return {offset, element: child};
+    return closest;
+  }, {offset: -Infinity}).element;
+}
+function onDragMove(e){
+  if(!dragState) return;
+  e.preventDefault();
+  const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  const afterElement = getDragAfterElement(chatLog, clientY);
+  if(afterElement == null) chatLog.appendChild(dragState.wrap);
+  else chatLog.insertBefore(dragState.wrap, afterElement);
+}
+function onDragEnd(){
+  if(!dragState) return;
+  dragState.wrap.classList.remove('dragging');
+  document.removeEventListener('pointermove', onDragMove);
+  document.removeEventListener('pointerup', onDragEnd);
+  document.removeEventListener('pointercancel', onDragEnd);
+  dragState = null;
+  syncOrderFromDOM();
+}
+function initDrag(wrap, grip){
+  grip.addEventListener('pointerdown', (e)=>{
+    e.preventDefault();
+    dragState = { wrap };
+    wrap.classList.add('dragging');
+    document.addEventListener('pointermove', onDragMove);
+    document.addEventListener('pointerup', onDragEnd);
+    document.addEventListener('pointercancel', onDragEnd);
+  });
+}
+function syncOrderFromDOM(){
+  const order = [...chatLog.querySelectorAll('.msg-wrap')].map(el=>el.dataset.id);
+  messages.sort((a,b)=> order.indexOf(a.id) - order.indexOf(b.id));
+}
+function getHistory(){
+  return messages.filter(m=>m.role==='user'||m.role==='assistant').map(m=>({role:m.role, content:m.content}));
+}
+
+function appendMsg(text, role, isMarkdown){
+  const id = 'm'+(msgIdCounter++);
+  const wrap = document.createElement('div');
+  wrap.className = 'msg-wrap ' + role;
+  wrap.dataset.id = id;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg ' + role;
+  if(role==='bot'){
+    bubble.innerHTML = `<div class="chat-name">Trợ lý Hải Đăng</div>` + (isMarkdown ? renderMarkdown(text) : `<p>${text}</p>`);
+  } else {
+    bubble.textContent = text;
+  }
+
+  if(role!=='system'){
+    const grip = document.createElement('button');
+    grip.type = 'button';
+    grip.className = 'msg-grip';
+    grip.title = 'Kéo để sắp xếp lại vị trí tin nhắn';
+    grip.innerHTML = '⠿';
+    initDrag(wrap, grip);
+    if(role==='user'){ wrap.appendChild(bubble); wrap.appendChild(grip); }
+    else { wrap.appendChild(grip); wrap.appendChild(bubble); }
+  } else {
+    wrap.appendChild(bubble);
+  }
+
+  chatLog.appendChild(wrap);
+  chatLog.scrollTop = chatLog.scrollHeight;
+
+  messages.push({id, role: role==='bot' ? 'assistant' : role, content:text});
+  return wrap;
+}
+
+function appendTyping(){
+  const div = document.createElement('div');
+  div.className = 'typing-dots';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  chatLog.appendChild(div);
+  chatLog.scrollTop = chatLog.scrollHeight;
+  return div;
+}
+
+appendMsg('Xin chào! Tôi là trợ lý sức khỏe của Trạm Y Tế Côn Đảo. Tôi có thể hỗ trợ tư vấn sơ bộ dựa trên thông tin sức khỏe của bạn. Nếu đây là tình huống khẩn cấp, vui lòng bấm nút "Trường hợp khẩn cấp" bên trái thay vì nhắn tin.', 'bot');
+
+function handleEmergency(){
+  appendMsg('🚨 Đã kích hoạt quy trình khẩn cấp.', 'system');
+  appendMsg('Bước 1: Đang kết nối trực tiếp đến Trung tâm Y tế Quân Dân Y Côn Đảo — Hotline: 0254 383 0250. Vui lòng giữ máy.', 'bot');
+  setTimeout(()=>{
+    appendMsg('Nếu không thể liên hệ được cơ sở y tế trong 2 phút, hệ thống sẽ tự động chuyển kết nối đến UBND huyện Côn Đảo (Hotline: 0254 383 0026) để phối hợp phương án hỗ trợ tốt nhất.', 'bot');
+  }, 900);
+}
+
+function handleSpecialist(){
+  appendMsg('🩺 Yêu cầu kết nối bác sĩ chuyên khoa.', 'system');
+  appendMsg('Đây là trường hợp thiết yếu (không khẩn cấp). Đang chuyển thông tin hồ sơ sức khỏe của bạn đến bác sĩ chuyên khoa phù hợp tại đất liền để được tư vấn và hỗ trợ điều trị qua kết nối từ xa. Bạn sẽ được liên hệ lại trong thời gian sớm nhất.', 'bot');
+}
+
+function askPreset(text){
+  document.getElementById('chat-text').value = text;
+  sendChat();
+}
+
+function containsEmergency(text){
+  const lower = text.toLowerCase();
+  return EMERGENCY_WORDS.some(w => lower.includes(w));
+}
+
+async function sendChat(){
+  const input = document.getElementById('chat-text');
+  const text = input.value.trim();
+  if(!text) return;
+  appendMsg(text, 'user');
+  input.value='';
+
+  if(containsEmergency(text)){
+    appendMsg('Mô tả của bạn có dấu hiệu khẩn cấp. Vui lòng bấm nút "🚨 Trường hợp khẩn cấp" ở bên trái ngay để được kết nối trực tiếp với cơ sở y tế, thay vì chờ tư vấn qua chat.', 'system');
+    return;
+  }
+
+  const typingEl = appendTyping();
+
+  try{
+    const activeMember = selectedMember();
+    const profileContext = activeMember
+      ? `Thông tin hồ sơ người dùng đang trao đổi: Tên ${activeMember.name||'—'}, tiền sử/dị ứng: ${activeMember.history||'không có'}.`
+      : `Người dùng chưa chọn hồ sơ thành viên gia đình nào trong ứng dụng.`;
+
+    const systemPrompt = `Bạn là "Trợ lý Hải Đăng" — một chuyên viên tư vấn sức khỏe AI thực thụ, làm việc trong ứng dụng "Hải Đăng Sức Khỏe" phục vụ cộng đồng dân cư Côn Đảo (đảo xa đất liền, tiếp cận y tế hạn chế). Hãy trò chuyện như một nhân viên y tế tuyến đầu tận tâm, không phải một cỗ máy trả lời chung chung.
+
+Nguyên tắc trả lời:
+1. Nếu người dùng mô tả triệu chứng nhưng thông tin còn thiếu, hãy hỏi lại 1-2 câu làm rõ trước khi đưa lời khuyên (thời gian khởi phát, mức độ, triệu chứng kèm theo) — giống một buổi tư vấn thật, không trả lời qua loa ngay từ câu đầu nếu chưa đủ dữ kiện.
+2. Khi đã đủ thông tin, đưa ra nhận định sơ bộ có cấu trúc: tình trạng có thể liên quan đến gì (không chẩn đoán khẳng định), việc nên làm tại nhà, và khi nào cần đến cơ sở y tế. Dùng gạch đầu dòng khi liệt kê.
+3. KHÔNG chẩn đoán xác định, KHÔNG kê đơn thuốc hay liều lượng cụ thể.
+4. Nếu phát hiện dấu hiệu nghiêm trọng, khuyên dùng ngay nút khẩn cấp trong ứng dụng thay vì tiếp tục tư vấn.
+5. Văn phong ấm áp, xưng "mình", gọi người dùng là "bạn", ngắn gọn (dưới 150 từ), có thể dùng in đậm (**...**) cho ý quan trọng.
+6. ${profileContext}`;
+
+    const response = await fetch(CHAT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + authToken },
+      body: JSON.stringify({
+        system: systemPrompt,
+        messages: getHistory()
+      })
+    });
+    const data = await response.json();
+    typingEl.remove();
+    if (!response.ok) {
+      appendMsg(data.error || 'Không thể kết nối trợ lý AI lúc này. Nếu cần hỗ trợ gấp, vui lòng dùng nút "Trường hợp khẩn cấp".', 'bot');
+      return;
+    }
+    const reply = (data.content || []).map(b=>b.text||'').join('\n').trim() || 'Xin lỗi, tôi chưa thể phản hồi lúc này. Vui lòng thử lại.';
+    appendMsg(reply, 'bot', true);
+  }catch(err){
+    typingEl.remove();
+    appendMsg('Không thể kết nối trợ lý AI lúc này (kiểm tra lại proxy server đã chạy chưa). Nếu cần hỗ trợ gấp, vui lòng dùng nút "Trường hợp khẩn cấp".', 'bot');
+  }
+}
+</script>
+</body>
+</html>

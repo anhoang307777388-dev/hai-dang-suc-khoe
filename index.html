@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hải Đăng Sức Khỏe — Côn Đảo</title>
+<!-- Thư viện tạo mã QR (hiển thị) và đọc mã QR (quét bằng camera) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
@@ -575,30 +578,61 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
   <div class="panel-hero"><h2>Hồ Sơ Sức Khỏe Gia Đình</h2><p>Quản lý hồ sơ của từng thành viên trong gia đình — luôn sẵn sàng khi cần đến bác sĩ.</p></div>
   <div class="wrap panel-body">
 
-    <div class="card" style="margin-bottom:22px;">
-      <h3>Thành viên gia đình</h3>
-      <div id="family-tabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;"></div>
+    <!-- Bước 1: bắt buộc tạo hồ sơ của chính chủ tài khoản trước -->
+    <div id="self-onboarding" class="card connect-card" style="display:none;margin-bottom:22px;">
+      <h3 style="color:var(--navy);">👤 Trước tiên, tạo hồ sơ sức khỏe của chính bạn</h3>
+      <p style="color:var(--ink-soft);font-size:14px;margin-top:0;">Đây sẽ là hồ sơ "Bản thân" — sau khi tạo xong bạn có thể thêm hồ sơ cho người thân trong gia đình.</p>
+      <label>Họ và tên</label>
+      <input id="self-name" placeholder="Nguyễn Văn A">
       <div class="grid-2">
-        <input id="fam-new-name" placeholder="Tên thành viên mới (VD: Nguyễn Văn B)">
-        <select id="fam-new-relationship">
-          <option value="">Quan hệ với bạn</option>
-          <option>Bản thân</option><option>Vợ/Chồng</option><option>Con</option>
-          <option>Bố</option><option>Mẹ</option><option>Ông</option><option>Bà</option><option>Khác</option>
-        </select>
+        <div><label>Ngày sinh</label><input id="self-dob" type="date"></div>
+        <div><label>Giới tính</label><select id="self-gender"><option>Nam</option><option>Nữ</option><option>Khác</option></select></div>
       </div>
-      <button class="btn btn-outline" onclick="addFamilyMember()">+ Thêm thành viên</button>
+      <label>Tiền sử bệnh / dị ứng (nếu có)</label>
+      <textarea id="self-history" rows="2" placeholder="VD: Tăng huyết áp, dị ứng penicillin..."></textarea>
+      <button class="btn btn-primary" onclick="createSelfProfile()">Tạo hồ sơ của tôi</button>
     </div>
 
-    <div id="family-empty" class="card" style="display:none;text-align:center;color:var(--ink-soft);">
-      Chưa có thành viên nào — thêm thành viên đầu tiên ở trên (có thể là chính bạn).
+    <!-- Bước 2: sau khi đã có hồ sơ bản thân, hiện quản lý danh sách + thêm người thân -->
+    <div id="family-manage-card" class="card" style="display:none;margin-bottom:22px;">
+      <h3>Hồ sơ trong gia đình</h3>
+      <div id="family-tabs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;"></div>
+      <div style="border-top:1px solid var(--line);margin:6px 0 14px;padding-top:14px;">
+        <label style="margin-bottom:8px;">Thêm người thân khác</label>
+        <div class="grid-2">
+          <input id="fam-new-name" placeholder="Tên thành viên mới (VD: Nguyễn Văn B)">
+          <select id="fam-new-relationship">
+            <option value="">Quan hệ với bạn</option>
+            <option>Vợ/Chồng</option><option>Con</option>
+            <option>Bố</option><option>Mẹ</option><option>Ông</option><option>Bà</option><option>Khác</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-outline" onclick="addFamilyMember()">+ Thêm thủ công</button>
+          <button class="btn btn-outline" onclick="openQrScanner('addMember')">📷 Hoặc quét mã QR có sẵn</button>
+        </div>
+      </div>
     </div>
 
     <div id="family-detail" style="display:none;">
       <div id="member-alerts" style="margin-bottom:16px;"></div>
+
+      <div class="card" style="margin-bottom:22px;border:1.5px solid var(--blue);">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
+          <h3 style="margin:0;">📋 Mức độ chủ động chăm sóc sức khỏe</h3>
+          <button class="btn btn-secondary" onclick="openBehaviorQuiz()">Làm bài đánh giá mới</button>
+        </div>
+        <div id="behavior-latest" style="margin-top:12px;"></div>
+        <div id="behavior-history" style="margin-top:10px;"></div>
+      </div>
+
       <div class="grid-2">
         <div class="card">
-          <h3>Thông tin cá nhân</h3>
-          <label>Họ và tên</label>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h3 style="margin:0;">Thông tin cá nhân</h3>
+            <button class="btn btn-outline" style="padding:6px 12px;font-size:12.5px;" onclick="showMemberQr()">📱 Mã QR hồ sơ</button>
+          </div>
+          <label style="margin-top:14px;">Họ và tên</label>
           <input id="p-name" placeholder="Nguyễn Văn A">
           <div class="grid-2">
             <div><label>Ngày sinh</label><input id="p-dob" type="date"></div>
@@ -611,7 +645,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
           <label>Tiền sử bệnh / dị ứng</label>
           <textarea id="p-history" rows="3" placeholder="VD: Tăng huyết áp, dị ứng penicillin..."></textarea>
           <button class="btn btn-primary" onclick="saveProfile()">Lưu hồ sơ</button>
-          <button class="btn btn-outline" style="border-color:#FF6B4A;color:#FF6B4A;" onclick="deleteFamilyMember()">Xóa thành viên này</button>
+          <button id="delete-member-btn" class="btn btn-outline" style="border-color:#FF6B4A;color:#FF6B4A;" onclick="deleteFamilyMember()">Xóa thành viên này</button>
           <div id="profile-saved" class="status-tag" style="display:none;">✓ Đã lưu hồ sơ</div>
         </div>
 
@@ -751,7 +785,10 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
 
     <div class="grid-2">
       <div>
-        <h3 style="color:var(--navy);margin-bottom:16px;">Yêu cầu &amp; phản ánh từ người dân</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+          <h3 style="color:var(--navy);margin:0;">Yêu cầu &amp; phản ánh từ người dân</h3>
+          <button class="btn btn-primary" onclick="openQrScanner('medicalLookup')">📷 Quét mã QR bệnh nhân</button>
+        </div>
         <div id="medical-requests-list"></div>
       </div>
       <div>
@@ -810,9 +847,55 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
   </div>
 </div>
 
+<!-- ================= MÃ QR HỒ SƠ ================= -->
+<div id="qr-show-backdrop" style="display:none;position:fixed;inset:0;background:rgba(20,20,20,.55);z-index:9600;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:340px;margin:16px;text-align:center;">
+    <h3 style="color:var(--navy);">📱 Mã QR hồ sơ</h3>
+    <p id="qr-show-name" style="font-size:14px;color:var(--ink-soft);margin-top:-4px;"></p>
+    <canvas id="qr-show-canvas" style="margin:10px auto;max-width:100%;"></canvas>
+    <p style="font-size:12.5px;color:var(--ink-soft);">Đưa mã này cho người thân hoặc nhân viên y tế quét để lấy nhanh thông tin, không cần gõ tay.</p>
+    <button class="btn btn-outline" style="width:100%;" onclick="document.getElementById('qr-show-backdrop').style.display='none';">Đóng</button>
+  </div>
+</div>
+
+<!-- ================= QUÉT MÃ QR (CAMERA) ================= -->
+<div id="qr-scan-backdrop" style="display:none;position:fixed;inset:0;background:rgba(20,20,20,.7);z-index:9600;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:380px;margin:16px;text-align:center;">
+    <h3 style="color:var(--navy);">📷 Quét mã QR</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:-6px;">Đưa mã QR vào giữa khung hình bên dưới.</p>
+    <video id="qr-scan-video" style="width:100%;border-radius:12px;background:#000;" playsinline muted></video>
+    <canvas id="qr-scan-canvas" style="display:none;"></canvas>
+    <div id="qr-scan-error" style="display:none;color:#E0342B;font-size:13px;margin-top:8px;"></div>
+    <button class="btn btn-outline" style="width:100%;margin-top:12px;" onclick="closeQrScanner()">Hủy quét</button>
+  </div>
+</div>
+
+<!-- ================= ĐÁNH GIÁ HÀNH VI CHỦ ĐỘNG CHĂM SÓC SỨC KHỎE ================= -->
+<div id="behavior-quiz-backdrop" style="display:none;position:fixed;inset:0;background:rgba(20,20,20,.6);z-index:9600;align-items:center;justify-content:center;padding:16px;">
+  <div class="card" style="max-width:640px;width:100%;max-height:88vh;overflow-y:auto;">
+    <h3 style="color:var(--navy);">📋 Đánh giá mức độ chủ động chăm sóc sức khỏe</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:-6px;">Trả lời theo đúng thực tế của <b id="behavior-quiz-name"></b> gần đây. Không có câu đúng/sai. Thang điểm: 1 = Không bao giờ · 2 = Hiếm khi · 3 = Thỉnh thoảng · 4 = Thường xuyên · 5 = Luôn luôn.</p>
+    <div id="behavior-quiz-body"></div>
+    <div id="behavior-quiz-error" style="display:none;color:#E0342B;font-size:13px;margin:10px 0;"></div>
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <button class="btn btn-outline" style="flex:1;" onclick="document.getElementById('behavior-quiz-backdrop').style.display='none';">Hủy</button>
+      <button class="btn btn-primary" style="flex:1;" onclick="submitBehaviorQuiz()">Nộp bài & xem kết quả</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= KẾT QUẢ QUÉT (DÀNH CHO NHÂN VIÊN Y TẾ) ================= -->
+<div id="qr-patient-backdrop" style="display:none;position:fixed;inset:0;background:rgba(20,20,20,.6);z-index:9700;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:420px;margin:16px;max-height:85vh;overflow-y:auto;">
+    <h3 style="color:var(--navy);">🩺 Hồ sơ bệnh nhân (quét QR)</h3>
+    <div id="qr-patient-content"></div>
+    <button class="btn btn-outline" style="width:100%;margin-top:14px;" onclick="document.getElementById('qr-patient-backdrop').style.display='none';">Đóng</button>
+  </div>
+</div>
+
 <script>
 // ⚠️ Sau khi deploy proxy-server (xem README), thay URL bên dưới bằng URL server thật của bạn.
-const API_BASE_URL = 'https://haidang-yfag.onrender.com';
+const API_BASE_URL = 'https://hai-dang-suc-khoe.onrender.com';
 const CHAT_API_URL = API_BASE_URL + '/api/chat';
 
 // ---------- Auth state ----------
@@ -969,9 +1052,32 @@ async function loadFamily(){
     if(!familyMembers.some(m=>m.id===selectedMemberId)){
       selectedMemberId = familyMembers.length ? familyMembers[0].id : null;
     }
+    document.getElementById('self-onboarding').style.display = familyMembers.length ? 'none' : 'block';
+    document.getElementById('family-manage-card').style.display = familyMembers.length ? 'block' : 'none';
+    if(!familyMembers.length){
+      document.getElementById('self-name').value = (currentUser && currentUser.name) || '';
+    }
     renderFamilyTabs();
     renderMemberDetail();
   }catch(err){ console.error('Không tải được hồ sơ gia đình:', err.message); }
+}
+
+// Tạo hồ sơ "Bản thân" — bắt buộc làm trước khi có thể thêm người thân khác
+async function createSelfProfile(){
+  const name = document.getElementById('self-name').value.trim();
+  if(!name){ alert('Vui lòng nhập họ tên.'); return; }
+  const payload = {
+    name,
+    relationship: 'Bản thân',
+    dob: document.getElementById('self-dob').value,
+    gender: document.getElementById('self-gender').value,
+    history: document.getElementById('self-history').value,
+  };
+  try{
+    const data = await apiFetch('/api/family', { method:'POST', body: JSON.stringify(payload) });
+    await loadFamily();
+    selectMember(data.member.id);
+  }catch(err){ alert('Không tạo được hồ sơ: ' + err.message); }
 }
 
 function renderFamilyTabs(){
@@ -1008,7 +1114,6 @@ async function deleteFamilyMember(){
 
 function renderMemberDetail(){
   const m = selectedMember();
-  document.getElementById('family-empty').style.display = familyMembers.length ? 'none' : 'block';
   document.getElementById('family-detail').style.display = m ? 'block' : 'none';
   if(!m) return;
   document.getElementById('p-name').value = m.name || '';
@@ -1017,12 +1122,104 @@ function renderMemberDetail(){
   document.getElementById('p-relationship').value = m.relationship || '';
   document.getElementById('p-history').value = m.history || '';
   document.getElementById('profile-saved').style.display = 'none';
-  renderExams(); renderMeds(); renderMemberAlerts();
+  renderExams(); renderMeds(); renderMemberAlerts(); renderBehaviorSection();
   document.getElementById('vitals-member-label').textContent = '— ' + m.name;
   renderVitals();
   document.getElementById('ai-insight-box').style.display = 'none';
   document.getElementById('vital-alert-box').style.display = 'none';
 }
+
+// ---------- Mã QR hồ sơ ----------
+function showMemberQr(){
+  const m = selectedMember();
+  if(!m || !m.qrCode) return;
+  document.getElementById('qr-show-name').textContent = 'Hồ sơ: ' + m.name;
+  const canvas = document.getElementById('qr-show-canvas');
+  QRCode.toCanvas(canvas, m.qrCode, { width: 220, margin: 1 });
+  document.getElementById('qr-show-backdrop').style.display = 'flex';
+}
+
+// ---------- Quét mã QR bằng camera ----------
+let qrScanStream = null;
+let qrScanRAF = null;
+let qrScanMode = null; // 'addMember' | 'medicalLookup'
+
+async function openQrScanner(mode){
+  qrScanMode = mode;
+  document.getElementById('qr-scan-error').style.display = 'none';
+  document.getElementById('qr-scan-backdrop').style.display = 'flex';
+  try{
+    qrScanStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+    const video = document.getElementById('qr-scan-video');
+    video.srcObject = qrScanStream;
+    await video.play();
+    qrScanTick();
+  }catch(err){
+    const el = document.getElementById('qr-scan-error');
+    el.textContent = 'Không mở được camera: ' + err.message + '. Hãy cho phép quyền truy cập camera.';
+    el.style.display = 'block';
+  }
+}
+function closeQrScanner(){
+  if(qrScanRAF) cancelAnimationFrame(qrScanRAF);
+  if(qrScanStream){ qrScanStream.getTracks().forEach(t=>t.stop()); qrScanStream = null; }
+  document.getElementById('qr-scan-backdrop').style.display = 'none';
+}
+function qrScanTick(){
+  const video = document.getElementById('qr-scan-video');
+  const canvas = document.getElementById('qr-scan-canvas');
+  if(video.readyState === video.HAVE_ENOUGH_DATA){
+    canvas.width = video.videoWidth; canvas.height = video.videoHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const code = jsQR(imageData.data, imageData.width, imageData.height);
+    if(code && code.data){
+      const scannedText = code.data;
+      closeQrScanner();
+      handleQrResult(scannedText);
+      return;
+    }
+  }
+  qrScanRAF = requestAnimationFrame(qrScanTick);
+}
+
+async function handleQrResult(code){
+  try{
+    const data = await apiFetch('/api/family/lookup/' + encodeURIComponent(code));
+    const info = data.member;
+    if(qrScanMode === 'addMember'){
+      const payload = { name: info.name, dob: info.dob, gender: info.gender, history: info.history, relationship: info.relationship || '' };
+      const created = await apiFetch('/api/family', { method:'POST', body: JSON.stringify(payload) });
+      await loadFamily();
+      selectMember(created.member.id);
+      alert(`Đã thêm "${info.name}" vào danh sách gia đình từ mã QR.`);
+    } else if(qrScanMode === 'medicalLookup'){
+      showPatientLookup(info);
+    }
+  }catch(err){
+    alert('Không đọc được thông tin từ mã QR: ' + err.message);
+  }
+}
+
+function showPatientLookup(info){
+  const alertsHtml = info.alerts && info.alerts.length
+    ? info.alerts.map(a=>`<div style="color:#B23B2E;font-size:13px;">⚠️ ${a.message}</div>`).join('')
+    : `<div style="color:#2E9B5C;font-size:13px;">✓ Không có cảnh báo</div>`;
+  const medsHtml = info.meds && info.meds.length
+    ? info.meds.map(md=>`<div class="list-row"><div><b style="font-size:13px;">${md.name}</b><br><span style="color:var(--ink-soft);font-size:13px;">${md.schedule||''}</span></div></div>`).join('')
+    : '<p style="color:#9AAAA6;font-size:13px;">Không có thuốc đang dùng.</p>';
+  document.getElementById('qr-patient-content').innerHTML = `
+    <p style="font-size:13px;color:var(--ink-soft);margin:0 0 4px;">${info.relationship||''}</p>
+    <h3 style="margin:0 0 4px;">${info.name}</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin:0 0 14px;">${info.dob||'Chưa rõ ngày sinh'} · ${info.gender||'—'}</p>
+    <div class="card" style="margin-bottom:12px;"><b style="font-size:13px;">Tiền sử bệnh / dị ứng</b><p style="font-size:13.5px;margin:6px 0 0;">${info.history || 'Không có'}</p></div>
+    <div class="card" style="margin-bottom:12px;"><b style="font-size:13px;">Cảnh báo chỉ số gần nhất</b><div style="margin-top:6px;">${alertsHtml}</div></div>
+    <div class="card"><b style="font-size:13px;">Thuốc đang dùng</b><div style="margin-top:6px;">${medsHtml}</div></div>
+  `;
+  document.getElementById('qr-patient-backdrop').style.display = 'flex';
+}
+
 
 async function saveProfile(){
   const m = selectedMember();
@@ -1197,10 +1394,125 @@ async function addVital(){
   }catch(err){ alert('Không ghi nhận được: ' + err.message); }
 }
 
+// ---------- Đánh giá mức độ chủ động chăm sóc sức khỏe (20 tiêu chí, 5 nhóm) ----------
+const BEHAVIOR_GROUPS = [
+  { name: 'Nhóm 1: Theo dõi và quản lý sức khỏe', items: [
+    ['1.1','Tôi chủ động theo dõi các chỉ số sức khỏe phù hợp với bản thân (ví dụ: cân nặng, huyết áp, nhịp tim...).'],
+    ['1.2','Khi nhận thấy những thay đổi hoặc dấu hiệu bất thường của cơ thể, tôi chủ động theo dõi và tìm cách xử lý phù hợp.'],
+    ['1.3','Tôi chủ động ghi chép hoặc lưu giữ thông tin sức khỏe, kết quả khám, xét nghiệm và các dữ liệu sức khỏe cần thiết.'],
+    ['1.4','Tôi chủ động đánh giá lại tình trạng và thói quen sức khỏe của bản thân để điều chỉnh khi cần thiết.'],
+  ]},
+  { name: 'Nhóm 2: Duy trì lối sống lành mạnh', items: [
+    ['2.1','Tôi chủ động lựa chọn thực phẩm phù hợp và cân đối trong chế độ ăn hằng ngày.'],
+    ['2.2','Tôi chủ động hạn chế các thực phẩm, đồ uống hoặc thói quen có thể gây hại cho sức khỏe.'],
+    ['2.3','Tôi chủ động duy trì hoạt động thể chất hoặc vận động phù hợp với bản thân.'],
+    ['2.4','Tôi chủ động sắp xếp thời gian ngủ và nghỉ ngơi hợp lý để bảo vệ sức khỏe.'],
+  ]},
+  { name: 'Nhóm 3: Phòng bệnh và phát hiện sớm', items: [
+    ['3.1','Tôi chủ động thực hiện khám sức khỏe phù hợp ngay cả khi chưa xuất hiện triệu chứng bất thường.'],
+    ['3.2','Tôi chủ động thực hiện tiêm chủng, tầm soát hoặc các biện pháp phòng bệnh phù hợp theo khuyến cáo.'],
+    ['3.3','Tôi chủ động phòng tránh những yếu tố có thể làm tăng nguy cơ ảnh hưởng đến sức khỏe của bản thân.'],
+    ['3.4','Khi nhận thấy dấu hiệu hoặc nguy cơ sức khỏe đáng lưu ý, tôi chủ động tìm kiếm sự hỗ trợ phù hợp.'],
+  ]},
+  { name: 'Nhóm 4: Quản lý và duy trì chăm sóc sức khỏe', items: [
+    ['4.1','Khi được nhân viên y tế hướng dẫn chăm sóc sức khỏe, tôi chủ động thực hiện theo hướng dẫn đó.'],
+    ['4.2','Khi được bác sĩ kê thuốc, tôi chủ động sử dụng thuốc đúng hướng dẫn.'],
+    ['4.3','Sau khi phát hiện hoặc được xác định có vấn đề sức khỏe, tôi chủ động theo dõi tình trạng của mình.'],
+    ['4.4','Khi cần tiếp tục theo dõi hoặc điều trị, tôi chủ động tái khám hoặc duy trì việc chăm sóc sức khỏe theo hướng dẫn.'],
+  ]},
+  { name: 'Nhóm 5: Tìm kiếm và sử dụng nguồn lực sức khỏe', items: [
+    ['5.1','Tôi chủ động tìm kiếm thông tin về sức khỏe từ các nguồn đáng tin cậy.'],
+    ['5.2','Khi có vấn đề hoặc thắc mắc về sức khỏe mà chưa rõ, tôi chủ động tham khảo ý kiến của nhân viên y tế hoặc người có chuyên môn.'],
+    ['5.3','Khi cần được chăm sóc hoặc hỗ trợ về sức khỏe, tôi chủ động liên hệ với cơ sở y tế hoặc nguồn hỗ trợ phù hợp.'],
+    ['5.4','Tôi chủ động cập nhật những kiến thức và khuyến cáo phù hợp để bảo vệ và nâng cao sức khỏe của bản thân.'],
+  ]},
+];
+const BEHAVIOR_SCALE = [[1,'Không bao giờ'],[2,'Hiếm khi'],[3,'Thỉnh thoảng'],[4,'Thường xuyên'],[5,'Luôn luôn']];
+
+function openBehaviorQuiz(){
+  const m = selectedMember();
+  if(!m) return;
+  document.getElementById('behavior-quiz-name').textContent = m.name;
+  const body = document.getElementById('behavior-quiz-body');
+  body.innerHTML = BEHAVIOR_GROUPS.map(g => `
+    <div style="margin-top:16px;">
+      <b style="font-size:13.5px;color:var(--blue-dark);">${g.name}</b>
+      ${g.items.map(([code,text]) => `
+        <div style="padding:10px 0;border-bottom:1px solid var(--line);">
+          <div style="font-size:13.5px;margin-bottom:8px;">${code} — ${text}</div>
+          <div style="display:flex;gap:14px;flex-wrap:wrap;">
+            ${BEHAVIOR_SCALE.map(([v,label]) => `
+              <label style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-soft);cursor:pointer;">
+                <input type="radio" name="b-${code}" value="${v}"> ${v} - ${label}
+              </label>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+  document.getElementById('behavior-quiz-error').style.display = 'none';
+  document.getElementById('behavior-quiz-backdrop').style.display = 'flex';
+}
+
+async function submitBehaviorQuiz(){
+  const m = selectedMember();
+  if(!m) return;
+  const answers = {};
+  let missing = false;
+  BEHAVIOR_GROUPS.forEach(g => g.items.forEach(([code]) => {
+    const checked = document.querySelector(`input[name="b-${code}"]:checked`);
+    if(!checked) missing = true;
+    else answers[code] = Number(checked.value);
+  }));
+  const errEl = document.getElementById('behavior-quiz-error');
+  if(missing){
+    errEl.textContent = 'Vui lòng trả lời đầy đủ cả 20 câu trước khi nộp bài.';
+    errEl.style.display = 'block';
+    return;
+  }
+  try{
+    const data = await apiFetch('/api/family/'+m.id+'/behavior-assessment', { method:'POST', body: JSON.stringify({answers}) });
+    if(!Array.isArray(m.behaviorAssessments)) m.behaviorAssessments = [];
+    m.behaviorAssessments.push(data.assessment);
+    document.getElementById('behavior-quiz-backdrop').style.display = 'none';
+    renderBehaviorSection();
+  }catch(err){
+    errEl.textContent = 'Lỗi khi nộp bài: ' + err.message;
+    errEl.style.display = 'block';
+  }
+}
+
+const BEHAVIOR_LEVEL_COLOR = { 'Thấp':'#E0342B', 'Trung bình thấp':'#E0A030', 'Trung bình cao':'#2F6FE0', 'Cao':'#17B26A' };
+function renderBehaviorSection(){
+  const m = selectedMember();
+  const latestEl = document.getElementById('behavior-latest');
+  const histEl = document.getElementById('behavior-history');
+  if(!m){ latestEl.innerHTML=''; histEl.innerHTML=''; return; }
+  const list = m.behaviorAssessments || [];
+  if(!list.length){
+    latestEl.innerHTML = `<p style="color:#9AAAA6;font-size:13px;">Chưa làm bài đánh giá nào. Bấm "Làm bài đánh giá mới" để bắt đầu.</p>`;
+    histEl.innerHTML = '';
+    return;
+  }
+  const latest = list[list.length-1];
+  const color = BEHAVIOR_LEVEL_COLOR[latest.level] || 'var(--navy)';
+  latestEl.innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div style="font-size:32px;font-weight:800;color:${color};">${latest.totalScore}<span style="font-size:14px;color:var(--ink-soft);font-weight:600;">/100</span></div>
+      <span class="status-pill" style="background:${color};color:#fff;">${latest.level}</span>
+      <span style="font-size:12px;color:var(--ink-soft);">Làm lúc ${new Date(latest.date).toLocaleString('vi-VN')}</span>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">
+      ${BEHAVIOR_GROUPS.map((g,i)=>`<span class="pill" title="${g.name}">Nhóm ${i+1}: ${latest.groupScores[i+1]}/20</span>`).join('')}
+    </div>`;
+  histEl.innerHTML = list.length > 1
+    ? `<details style="font-size:12.5px;color:var(--ink-soft);"><summary style="cursor:pointer;">Xem lịch sử (${list.length} lần)</summary>
+        ${list.slice().reverse().map(a=>`<div style="padding:6px 0;border-top:1px solid var(--line);">${new Date(a.date).toLocaleDateString('vi-VN')}: <b>${a.totalScore} điểm</b> — ${a.level}</div>`).join('')}
+       </details>`
+    : '';
+}
+
+
 async function askAiInsight(){
   const m = selectedMember();
-  if(!m){ alert('Vui lòng chọn thành viên trước.'); return; }
-  const box = document.getElementById('ai-insight-box');
   box.style.display='block';
   box.innerHTML = 'Đang phân tích...';
   try{

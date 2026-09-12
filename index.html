@@ -326,6 +326,16 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
 .small-btn.block{background:var(--coral);color:#fff;}
 .request-card{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px;background:#fff;}
 .request-card textarea{margin-bottom:8px;}
+
+/* ---------- KPI ---------- */
+.kpi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px;}
+@media(max-width:700px){.kpi-grid{grid-template-columns:1fr 1fr;}}
+.kpi-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+.kpi-card b{display:block;font-size:26px;color:var(--navy);font-weight:800;line-height:1.1;}
+.kpi-card span{font-size:11.5px;color:var(--ink-soft);font-family:'IBM Plex Mono';text-transform:uppercase;letter-spacing:.02em;}
+.kpi-card.accent{background:var(--mint);border-color:transparent;}
+.kpi-card.accent b{color:var(--green-dark);}
+.kpi-note{font-size:12px;color:var(--ink-soft);margin:-10px 0 20px;}
 </style>
 </head>
 <body>
@@ -359,6 +369,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
       <button class="tab-btn role-citizen" data-tab="care" style="display:none;">Chăm sóc sức khỏe</button>
       <button class="tab-btn role-citizen" data-tab="chat" style="display:none;">Trợ lý AI</button>
       <button class="tab-btn role-medical" data-tab="medical" style="display:none;">Nhân viên y tế</button>
+      <button class="tab-btn role-director" data-tab="director" style="display:none;">Giám đốc CSYT</button>
       <button class="tab-btn role-admin" data-tab="admin" style="display:none;">Quản trị</button>
     </div>
     <div class="header-actions auth-area">
@@ -399,8 +410,9 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
       <select id="reg-role">
         <option value="citizen">Người dân</option>
         <option value="medical">Nhân viên y tế</option>
+        <option value="director">Giám đốc cơ sở y tế</option>
       </select>
-      <div id="reg-medical-note" class="tip-box" style="display:none;">Tài khoản nhân viên y tế cần được quản trị viên duyệt trước khi đăng nhập được.</div>
+      <div id="reg-medical-note" class="tip-box" style="display:none;">Tài khoản nhân viên y tế / giám đốc cơ sở y tế cần được quản trị viên duyệt trước khi đăng nhập được.</div>
       <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:6px;" type="submit">Đăng ký</button>
     </form>
   </div>
@@ -761,9 +773,10 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
       </table>
     </div>
     <div class="card" style="margin-top:22px;">
-      <h3>Đề nghị cung cấp vật tư (từ nhân viên y tế)</h3>
+      <h3>Yêu cầu cấp thuốc / vật tư (theo dõi toàn hệ thống)</h3>
+      <p class="kpi-note" style="margin-top:-6px;">Các yêu cầu này nay do <b>Giám đốc cơ sở y tế</b> tiếp nhận và duyệt trực tiếp. Quản trị viên chỉ xem để theo dõi tổng thể.</p>
       <table class="data-table">
-        <thead><tr><th>Nhân viên</th><th>Vật tư/Thuốc</th><th>Số lượng</th><th>Lý do</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+        <thead><tr><th>Nhân viên</th><th>Vật tư/Thuốc</th><th>Số lượng</th><th>Lý do</th><th>Trạng thái</th></tr></thead>
         <tbody id="admin-proposals-body"></tbody>
       </table>
     </div>
@@ -772,8 +785,15 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
 
 <!-- MEDICAL STAFF -->
 <div id="panel-medical" class="panel">
-  <div class="panel-hero"><h2>Bảng Điều Khiển Nhân Viên Y Tế</h2><p>Tiếp nhận yêu cầu/phản ánh từ người dân và đề nghị cung cấp vật tư.</p></div>
+  <div class="panel-hero"><h2>Bảng Điều Khiển Nhân Viên Y Tế</h2><p>Tiếp nhận yêu cầu/phản ánh từ người dân, gửi yêu cầu cấp thuốc và theo dõi KPI hằng ngày.</p></div>
   <div class="wrap panel-body">
+
+    <h3 style="color:var(--navy);margin:0 0 14px;">📊 KPI hôm nay</h3>
+    <div class="kpi-grid" id="medical-kpi-grid">
+      <div class="kpi-card"><b id="kpi-handled">—</b><span>Yêu cầu người dân đã xử lý</span></div>
+      <div class="kpi-card"><b id="kpi-pending">—</b><span>Yêu cầu đang chờ xử lý</span></div>
+      <div class="kpi-card accent"><b id="kpi-medreq">—</b><span>Yêu cầu cấp thuốc đã gửi</span></div>
+    </div>
 
     <div class="card" style="border:2px solid #E0342B;margin-bottom:22px;">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;">
@@ -793,19 +813,66 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
       </div>
       <div>
         <div class="card">
-          <h3>Đề nghị cung cấp vật tư</h3>
-          <label>Tên vật tư/thuốc</label>
-          <input id="supply-item" placeholder="VD: Khẩu trang y tế, Paracetamol...">
+          <h3>Yêu cầu cấp thuốc / vật tư</h3>
+          <p class="kpi-note" style="margin-top:-4px;">Yêu cầu sẽ được gửi trực tiếp đến <b>Giám đốc cơ sở y tế</b> để duyệt.</p>
+          <label>Tên thuốc/vật tư</label>
+          <input id="supply-item" placeholder="VD: Paracetamol, Khẩu trang y tế...">
           <label>Số lượng</label>
           <input id="supply-qty" placeholder="VD: 200 hộp">
           <label>Lý do đề nghị</label>
           <textarea id="supply-reason" rows="2" placeholder="VD: Sắp hết tồn kho, chuẩn bị mùa dịch..."></textarea>
-          <button class="btn btn-primary" onclick="submitSupplyProposal()">Gửi đề nghị</button>
+          <button class="btn btn-primary" onclick="submitSupplyProposal()">Gửi yêu cầu cấp thuốc</button>
         </div>
         <div class="card" style="margin-top:16px;">
-          <h3>Đề nghị đã gửi</h3>
+          <h3>Yêu cầu đã gửi</h3>
           <div id="staff-proposals-list"></div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEALTH FACILITY DIRECTOR -->
+<div id="panel-director" class="panel">
+  <div class="panel-hero"><h2>Bảng Điều Khiển Giám Đốc Cơ Sở Y Tế</h2><p>Duyệt yêu cầu cấp thuốc từ nhân viên y tế và gửi yêu cầu hỗ trợ ra đất liền / chính quyền.</p></div>
+  <div class="wrap panel-body">
+
+    <div class="kpi-grid" id="director-kpi-grid">
+      <div class="kpi-card"><b id="dir-kpi-pending">—</b><span>Yêu cầu chờ duyệt</span></div>
+      <div class="kpi-card"><b id="dir-kpi-approved">—</b><span>Đã duyệt hôm nay</span></div>
+      <div class="kpi-card accent"><b id="dir-kpi-support">—</b><span>Yêu cầu hỗ trợ đang chờ</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Yêu cầu cấp thuốc / vật tư từ nhân viên y tế</h3>
+      <table class="data-table">
+        <thead><tr><th>Nhân viên</th><th>Vật tư/Thuốc</th><th>Số lượng</th><th>Lý do</th><th>Trạng thái</th><th>Hành động</th></tr></thead>
+        <tbody id="director-proposals-body"></tbody>
+      </table>
+    </div>
+
+    <div class="grid-2" style="margin-top:22px;">
+      <div class="card">
+        <h3>Gửi yêu cầu hỗ trợ</h3>
+        <label>Gửi đến</label>
+        <select id="support-target">
+          <option value="dat_lien">Hỗ trợ từ đất liền (tuyến trên)</option>
+          <option value="chinh_quyen">Chính quyền huyện Côn Đảo</option>
+        </select>
+        <label>Mức độ ưu tiên</label>
+        <select id="support-priority">
+          <option value="binh_thuong">Bình thường</option>
+          <option value="khan">Khẩn cấp</option>
+        </select>
+        <label>Tiêu đề</label>
+        <input id="support-title" placeholder="VD: Xin chi viện bác sĩ chuyên khoa Nhi">
+        <label>Nội dung chi tiết</label>
+        <textarea id="support-content" rows="3" placeholder="Mô tả tình huống cần hỗ trợ..."></textarea>
+        <button class="btn btn-primary" onclick="submitSupportRequest()">Gửi yêu cầu hỗ trợ</button>
+      </div>
+      <div class="card">
+        <h3>Yêu cầu hỗ trợ đã gửi</h3>
+        <div id="director-support-list"></div>
       </div>
     </div>
   </div>
@@ -928,7 +995,7 @@ function setAuthMode(mode){
   document.getElementById('auth-error').style.display='none';
 }
 document.getElementById('reg-role').addEventListener('change', e=>{
-  document.getElementById('reg-medical-note').style.display = e.target.value==='medical' ? 'block':'none';
+  document.getElementById('reg-medical-note').style.display = (e.target.value==='medical'||e.target.value==='director') ? 'block':'none';
 });
 function showAuthError(msg){
   const el = document.getElementById('auth-error');
@@ -981,7 +1048,7 @@ function logout(){
   switchTab('home');
 }
 
-const ROLE_LABEL = { admin:'Quản trị viên', citizen:'Người dân', medical:'Nhân viên y tế' };
+const ROLE_LABEL = { admin:'Quản trị viên', citizen:'Người dân', medical:'Nhân viên y tế', director:'Giám đốc cơ sở y tế' };
 
 function renderAuthUI(){
   const loggedIn = !!currentUser;
@@ -991,17 +1058,18 @@ function renderAuthUI(){
     document.getElementById('auth-user-name').textContent = currentUser.name;
     document.getElementById('auth-user-role').textContent = ROLE_LABEL[currentUser.role] || currentUser.role;
   }
-  ['citizen','medical','admin'].forEach(role=>{
+  ['citizen','medical','admin','director'].forEach(role=>{
     document.querySelectorAll('.role-'+role).forEach(btn=>{
       btn.style.display = (loggedIn && currentUser.role===role) ? 'inline-block' : 'none';
     });
   });
   if(loggedIn && currentUser.role==='admin') loadAdminPanel();
-  if(loggedIn && currentUser.role==='medical') loadMedicalPanel();
+  if(loggedIn && currentUser.role==='medical') { loadMedicalPanel(); loadMedicalKpi(); }
+  if(loggedIn && currentUser.role==='director') loadDirectorPanel();
   if(loggedIn && currentUser.role==='citizen') loadFamily();
   document.getElementById('sos-fab').style.display = (loggedIn && currentUser.role==='citizen') ? 'flex' : 'none';
   if(loggedIn && currentUser.role==='citizen') checkMySosStatus();
-  if(loggedIn && (currentUser.role==='medical'||currentUser.role==='admin')) startSosPolling();
+  if(loggedIn && (currentUser.role==='medical'||currentUser.role==='admin'||currentUser.role==='director')) startSosPolling();
   else stopSosPolling();
 }
 
@@ -1019,7 +1087,7 @@ async function restoreSession(){
 restoreSession();
 
 // ---------- Tabs ----------
-const PROTECTED_TABS = { profile:'citizen', care:'citizen', chat:'citizen', medical:'medical', admin:'admin' };
+const PROTECTED_TABS = { profile:'citizen', care:'citizen', chat:'citizen', medical:'medical', admin:'admin', director:'director' };
 function switchTab(name){
   const requiredRole = PROTECTED_TABS[name];
   if(requiredRole && (!currentUser || currentUser.role!==requiredRole)){
@@ -1553,6 +1621,7 @@ async function loadAdminPanel(){
           <select onchange="updateUser('${u.id}',{role:this.value})" ${u.role==='admin'?'disabled':''}>
             <option value="citizen" ${u.role==='citizen'?'selected':''}>Người dân</option>
             <option value="medical" ${u.role==='medical'?'selected':''}>Nhân viên y tế</option>
+            <option value="director" ${u.role==='director'?'selected':''}>Giám đốc cơ sở y tế</option>
             <option value="admin" ${u.role==='admin'?'selected':''}>Quản trị viên</option>
           </select>
         </td>
@@ -1577,11 +1646,7 @@ async function loadAdminPanel(){
         <td>${p.quantity||'—'}</td>
         <td>${p.reason||'—'}</td>
         <td><span class="status-pill ${p.status}">${p.status==='cho_duyet'?'Chờ duyệt':p.status==='da_duyet'?'Đã duyệt':'Từ chối'}</span></td>
-        <td>${p.status==='cho_duyet'
-          ? `<button class="small-btn approve" onclick="updateProposal('${p.id}','da_duyet')">Duyệt</button>
-             <button class="small-btn block" onclick="updateProposal('${p.id}','tu_choi')">Từ chối</button>`
-          : '—'}</td>
-      </tr>`).join('') : '<tr><td colspan="6" style="color:#9AAAA6;">Chưa có đề nghị nào.</td></tr>';
+      </tr>`).join('') : '<tr><td colspan="5" style="color:#9AAAA6;">Chưa có đề nghị nào.</td></tr>';
   }catch(err){ console.error(err); }
 }
 async function updateUser(id, patch){
@@ -1589,7 +1654,72 @@ async function updateUser(id, patch){
   catch(err){ alert(err.message); }
 }
 async function updateProposal(id, status){
-  try{ await apiFetch('/api/supply-proposals/'+id, { method:'PATCH', body: JSON.stringify({status}) }); loadAdminPanel(); }
+  try{
+    await apiFetch('/api/supply-proposals/'+id, { method:'PATCH', body: JSON.stringify({status}) });
+    if(currentUser && currentUser.role==='director') loadDirectorPanel();
+    else loadAdminPanel();
+  }
+  catch(err){ alert(err.message); }
+}
+
+// ---------- Director panel (Giám đốc cơ sở y tế) ----------
+const SUPPORT_TARGET_LABEL = { dat_lien:'Hỗ trợ từ đất liền', chinh_quyen:'Chính quyền huyện' };
+const SUPPORT_STATUS_LABEL = { cho_duyet:'Đã gửi — chờ phản hồi', dang_xu_ly:'Đang xử lý', da_xu_ly:'Đã phản hồi' };
+async function loadDirectorPanel(){
+  try{
+    const { proposals } = await apiFetch('/api/supply-proposals');
+    const body = document.getElementById('director-proposals-body');
+    body.innerHTML = proposals.length ? proposals.map(p => `
+      <tr>
+        <td>${p.staffName}</td>
+        <td>${p.item}</td>
+        <td>${p.quantity||'—'}</td>
+        <td>${p.reason||'—'}</td>
+        <td><span class="status-pill ${p.status}">${p.status==='cho_duyet'?'Chờ duyệt':p.status==='da_duyet'?'Đã duyệt':'Từ chối'}</span></td>
+        <td>${p.status==='cho_duyet'
+          ? `<button class="small-btn approve" onclick="updateProposal('${p.id}','da_duyet')">Duyệt</button>
+             <button class="small-btn block" onclick="updateProposal('${p.id}','tu_choi')">Từ chối</button>`
+          : '—'}</td>
+      </tr>`).join('') : '<tr><td colspan="6" style="color:#9AAAA6;">Chưa có yêu cầu nào.</td></tr>';
+
+    const today = new Date().toDateString();
+    const pending = proposals.filter(p=>p.status==='cho_duyet').length;
+    const approvedToday = proposals.filter(p=>p.status==='da_duyet' && p.updatedAt && new Date(p.updatedAt).toDateString()===today).length;
+    document.getElementById('dir-kpi-pending').textContent = pending;
+    document.getElementById('dir-kpi-approved').textContent = approvedToday;
+  }catch(err){ console.error(err); }
+
+  try{
+    const { requests } = await apiFetch('/api/support-requests');
+    const el = document.getElementById('director-support-list');
+    el.innerHTML = requests.length ? requests.map(r => `
+      <div class="request-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <b style="font-size:14px;">${r.title}</b>
+          <span class="status-pill ${r.status}">${SUPPORT_STATUS_LABEL[r.status]||r.status}</span>
+        </div>
+        <div style="font-size:13px;color:var(--ink-soft);margin-bottom:8px;">${SUPPORT_TARGET_LABEL[r.target]||r.target}${r.priority==='khan' ? ' · <b style="color:#B8431F;">Khẩn cấp</b>' : ''}<br>${r.content||''}</div>
+        ${r.status!=='da_xu_ly' ? `<button class="small-btn approve" onclick="updateSupportRequest('${r.id}','da_xu_ly')">Đánh dấu đã phản hồi</button>` : ''}
+      </div>`).join('') : '<p style="color:#9AAAA6;font-size:13px;">Chưa có yêu cầu hỗ trợ nào.</p>';
+    document.getElementById('dir-kpi-support').textContent = requests.filter(r=>r.status!=='da_xu_ly').length;
+  }catch(err){ console.error(err); }
+}
+
+async function submitSupportRequest(){
+  const target = document.getElementById('support-target').value;
+  const priority = document.getElementById('support-priority').value;
+  const title = document.getElementById('support-title').value;
+  const content = document.getElementById('support-content').value;
+  if(!title){ alert('Vui lòng nhập tiêu đề yêu cầu.'); return; }
+  try{
+    await apiFetch('/api/support-requests', { method:'POST', body: JSON.stringify({target, priority, title, content}) });
+    document.getElementById('support-title').value='';
+    document.getElementById('support-content').value='';
+    loadDirectorPanel();
+  }catch(err){ alert(err.message); }
+}
+async function updateSupportRequest(id, status){
+  try{ await apiFetch('/api/support-requests/'+id, { method:'PATCH', body: JSON.stringify({status}) }); loadDirectorPanel(); }
   catch(err){ alert(err.message); }
 }
 
@@ -1850,7 +1980,37 @@ async function submitSupplyProposal(){
     document.getElementById('supply-qty').value='';
     document.getElementById('supply-reason').value='';
     loadMedicalPanel();
+    loadMedicalKpi();
   }catch(err){ alert(err.message); }
+}
+
+// ---------- Medical staff KPI (hôm nay) ----------
+async function loadMedicalKpi(){
+  const today = new Date().toDateString();
+  try{
+    // Ưu tiên dùng endpoint KPI riêng nếu backend đã hỗ trợ.
+    const data = await apiFetch('/api/medical/kpi');
+    document.getElementById('kpi-handled').textContent = data.handledToday ?? '0';
+    document.getElementById('kpi-pending').textContent = data.pending ?? '0';
+    document.getElementById('kpi-medreq').textContent = data.medicineRequestsToday ?? '0';
+    return;
+  }catch(err){ /* Backend chưa có endpoint riêng — tính tạm từ dữ liệu đã tải. */ }
+
+  try{
+    const { requests } = await apiFetch('/api/requests');
+    const mine = requests.filter(r => r.staffId === currentUser.id || !r.staffId);
+    const handledToday = mine.filter(r => r.status==='da_xu_ly' && r.updatedAt && new Date(r.updatedAt).toDateString()===today).length;
+    const pending = requests.filter(r => r.status!=='da_xu_ly').length;
+    document.getElementById('kpi-handled').textContent = handledToday;
+    document.getElementById('kpi-pending').textContent = pending;
+  }catch(err){ console.error(err); }
+
+  try{
+    const { proposals } = await apiFetch('/api/supply-proposals');
+    const mine = proposals.filter(p => p.staffId === currentUser.id);
+    const medreqToday = mine.filter(p => p.createdAt ? new Date(p.createdAt).toDateString()===today : true).length;
+    document.getElementById('kpi-medreq').textContent = medreqToday;
+  }catch(err){ console.error(err); }
 }
 
 renderExams();renderMeds();renderReminders();renderVitals();

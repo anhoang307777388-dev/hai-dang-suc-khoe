@@ -1610,22 +1610,34 @@ function renderBehaviorSection(){
         return `<span class="pill" title="${g.name}" style="${low?'background:#FDECEA;color:#B23B2E;border:1px solid #F3B4AC;':''}">Nhóm ${i+1}: ${sc}/20${low?' ⚠️':''}</span>`;
       }).join('')}
     </div>
-    ${(() => {
-      const isModerate = (latest.level === 'Thấp' || latest.level === 'Trung bình thấp');
-      const lowGroups = BEHAVIOR_GROUPS.map((g,i)=>({ g, i, sc: latest.groupScores[i+1] })).filter(x => x.sc <= BEHAVIOR_GROUP_LOW_THRESHOLD);
-      if(!isModerate && !lowGroups.length) return '';
-      return `
-        <div style="margin-top:14px;">
-          ${isModerate ? `<div class="card" style="background:#FFF7E6;border:1px solid #F0D48A;margin-bottom:10px;">
-              <b style="font-size:13px;color:#8A5B00;">💡 Lời nhắc nhở chung</b>
-              <p style="font-size:13.5px;margin:6px 0 0;color:#6B4B00;">${BEHAVIOR_GENERAL_REMINDER}</p>
-            </div>` : ''}
-          ${lowGroups.length ? `<div class="card" style="background:#FDECEA;border:1px solid #F3B4AC;">
-              <b style="font-size:13px;color:#B23B2E;">📌 Gợi ý cải thiện theo từng mục</b>
-              ${lowGroups.map(x => `<div style="margin-top:8px;"><b style="font-size:12.5px;color:var(--navy);">${x.g.name} (${x.sc}/20)</b><p style="font-size:13px;margin:4px 0 0;color:#7A2E24;">${BEHAVIOR_GROUP_ADVICE[x.i]}</p></div>`).join('')}
-            </div>` : ''}
-        </div>`;
-    })()}`;
+    <div style="margin-top:14px;">
+      ${(() => {
+        const isModerate = (latest.level === 'Thấp' || latest.level === 'Trung bình thấp');
+        if(!isModerate) return '';
+        return `<div class="card" style="background:#FFF7E6;border:1px solid #F0D48A;margin-bottom:10px;">
+            <b style="font-size:13px;color:#8A5B00;">💡 Lời nhắc nhở chung</b>
+            <p style="font-size:13.5px;margin:6px 0 0;color:#6B4B00;">${BEHAVIOR_GENERAL_REMINDER}</p>
+          </div>`;
+      })()}
+      ${BEHAVIOR_GROUPS.map((g,i)=>{
+        const sc = latest.groupScores[i+1];
+        if(sc >= 20){
+          return `<div class="card" style="background:#EAF7EE;border:1px solid #B7E4C2;margin-bottom:8px;">
+            <b style="font-size:12.5px;color:#1F7A3D;">🌟 ${g.name} (${sc}/20) — Rất tốt</b>
+            <p style="font-size:13px;margin:4px 0 0;color:#1F7A3D;">Bạn đang làm rất tốt ở phần này, cứ tiếp tục duy trì nhé.</p>
+          </div>`;
+        }
+        const weak = sc <= BEHAVIOR_GROUP_LOW_THRESHOLD;
+        const bg = weak ? '#FDECEA' : '#EAF2FF';
+        const border = weak ? '#F3B4AC' : '#BFD8FA';
+        const titleColor = weak ? '#B23B2E' : '#1D4E89';
+        const textColor = weak ? '#7A2E24' : '#1D4E89';
+        return `<div class="card" style="background:${bg};border:1px solid ${border};margin-bottom:8px;">
+            <b style="font-size:12.5px;color:${titleColor};">${weak?'📌':'🙂'} ${g.name} (${sc}/20)${weak?' — Cần cải thiện':' — Khá tốt, có thể tốt hơn'}</b>
+            <p style="font-size:13px;margin:4px 0 0;color:${textColor};">${BEHAVIOR_GROUP_ADVICE[i]}</p>
+          </div>`;
+      }).join('')}
+    </div>`;
   histEl.innerHTML = list.length > 1
     ? `<details style="font-size:12.5px;color:var(--ink-soft);"><summary style="cursor:pointer;">Xem lịch sử (${list.length} lần)</summary>
         ${list.slice().reverse().map(a=>`<div style="padding:6px 0;border-top:1px solid var(--line);">${new Date(a.date).toLocaleDateString('vi-VN')}: <b>${a.totalScore} điểm</b> — ${a.level}</div>`).join('')}
@@ -1636,6 +1648,8 @@ function renderBehaviorSection(){
 
 async function askAiInsight(){
   const m = selectedMember();
+  if(!m){ alert('Vui lòng chọn thành viên trước.'); return; }
+  const box = document.getElementById('ai-insight-box');
   box.style.display='block';
   box.innerHTML = 'Đang phân tích...';
   try{

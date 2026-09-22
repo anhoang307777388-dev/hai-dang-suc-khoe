@@ -907,6 +907,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
     <p style="font-size:14px;color:var(--ink-soft);">Trung tâm Y tế Côn Đảo sẽ nhận vị trí GPS của bạn ngay lập tức và gọi lại để xác nhận cử xe cấp cứu.</p>
     <label>Số điện thoại để nhân viên y tế gọi lại</label>
     <input id="sos-phone" placeholder="09xx xxx xxx">
+    <label>SĐT người thân để báo tin (không bắt buộc)</label>
+    <input id="sos-relative-phone" placeholder="09xx xxx xxx">
     <label>Ghi chú (không bắt buộc)</label>
     <input id="sos-note" placeholder="VD: Khó thở, ngã cầu thang...">
     <div id="sos-confirm-error" style="display:none;color:#E0342B;font-size:13px;margin-top:6px;"></div>
@@ -1800,6 +1802,7 @@ let activeSosAlert = null;
 
 function openSosConfirm(){
   document.getElementById('sos-phone').value = (currentUser && currentUser.phone) || '';
+  document.getElementById('sos-relative-phone').value = '';
   document.getElementById('sos-note').value = '';
   document.getElementById('sos-confirm-error').style.display='none';
   document.getElementById('sos-confirm-backdrop').style.display='flex';
@@ -1818,13 +1821,14 @@ function triggerSos(){
     return;
   }
   const phone = document.getElementById('sos-phone').value.trim();
+  const relativePhone = document.getElementById('sos-relative-phone').value.trim();
   const note = document.getElementById('sos-note').value.trim();
   if(!phone){ showSosError('Vui lòng nhập số điện thoại để nhân viên y tế gọi lại.'); return; }
 
   navigator.geolocation.getCurrentPosition(async (pos)=>{
     try{
       const { latitude, longitude } = pos.coords;
-      const data = await apiFetch('/api/sos', { method:'POST', body: JSON.stringify({ lat: latitude, lng: longitude, phone, note }) });
+      const data = await apiFetch('/api/sos', { method:'POST', body: JSON.stringify({ lat: latitude, lng: longitude, phone, relativePhone, note }) });
       activeSosAlert = data.alert;
       closeSosConfirm();
       showSosActive();
@@ -1971,6 +1975,10 @@ async function loadSosAlertsForStaff(){
     el.innerHTML = active.map(a=>{
       const mapUrl = `https://www.google.com/maps?q=${a.lat},${a.lng}`;
       const telUrl = a.phone ? `tel:${a.phone.replace(/\s+/g,'')}` : null;
+      const relativeTelUrl = a.relativePhone ? `tel:${a.relativePhone.replace(/\s+/g,'')}` : null;
+      const familyHtml = (a.familyMembers && a.familyMembers.length)
+        ? `<div style="font-size:12.5px;color:var(--ink-soft);margin-top:6px;">👨‍👩‍👧 Hồ sơ gia đình: ${a.familyMembers.map(f=>`${f.name}${f.relationship?' ('+f.relationship+')':''}`).join(', ')}</div>`
+        : '';
       return `
       <div class="request-card" style="border-left:4px solid ${a.status==='active'?'#E0342B':'#E0A030'};">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
@@ -1980,9 +1988,11 @@ async function loadSosAlertsForStaff(){
         <div style="font-size:13px;color:var(--ink-soft);margin-bottom:8px;">
           ${a.note ? a.note+'<br>' : ''}Cập nhật vị trí lần cuối: ${new Date(a.updatedAt).toLocaleTimeString('vi-VN')}
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${familyHtml}
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
           <a class="small-btn approve" style="text-decoration:none;display:inline-block;" href="${mapUrl}" target="_blank">📍 Xem trên bản đồ</a>
           ${telUrl ? `<a class="small-btn approve" style="text-decoration:none;display:inline-block;" href="${telUrl}">📞 Gọi ${a.phone}</a>` : ''}
+          ${relativeTelUrl ? `<a class="small-btn approve" style="text-decoration:none;display:inline-block;background:#7C5CBF;" href="${relativeTelUrl}">👪 Báo người thân (${a.relativePhone})</a>` : ''}
           ${a.status==='active' ? `<button class="small-btn approve" onclick="setSosStatus('${a.id}','confirmed')">Đã gọi xác nhận</button>` : ''}
           <button class="small-btn block" onclick="setSosStatus('${a.id}','resolved')">Đóng ca</button>
         </div>

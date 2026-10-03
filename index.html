@@ -249,6 +249,38 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
 .connect-card{border:1.5px dashed var(--blue);background:var(--blue-light);}
 .status-tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'IBM Plex Mono';color:var(--green-dark);margin-top:10px;}
 
+
+/* ---------- Thư viện ---------- */
+.lib-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:-34px auto 30px;position:relative;z-index:2;}
+.lib-tab{border:1px solid var(--line);background:#fff;color:var(--navy-soft);font-family:inherit;font-weight:700;font-size:13.5px;padding:10px 18px;border-radius:999px;cursor:pointer;box-shadow:0 4px 14px rgba(11,42,67,.08);transition:.2s;}
+.lib-tab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+.lib-sec{display:none;animation:fade .3s ease;}
+.lib-sec.active{display:block;}
+.lib-sec>h3{font-size:20px;color:var(--navy);margin:0 0 6px;}
+.lib-sec>p.lib-desc{color:var(--ink-soft);font-size:14px;margin:0 0 18px;max-width:640px;}
+.lib-video{display:block;width:100%;max-height:72vh;background:#000;border-radius:var(--radius);box-shadow:var(--shadow);}
+.lib-video.portrait{max-width:380px;margin:0 auto;}
+.book-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+.book-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:10px;}
+.book-card .book-ic{width:46px;height:46px;border-radius:12px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;font-size:24px;}
+.book-card h4{margin:0;font-size:16px;color:var(--navy);}
+.book-card p{margin:0;font-size:13.5px;color:var(--ink-soft);line-height:1.55;flex:1;}
+.book-actions{display:flex;gap:8px;flex-wrap:wrap;}
+.book-viewer{margin-top:22px;display:none;}
+.book-viewer.show{display:block;}
+.book-viewer-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;}
+.book-viewer-bar b{color:var(--navy);font-size:14.5px;}
+.book-viewer iframe{width:100%;height:78vh;border:1px solid var(--line);border-radius:var(--radius);background:#fff;}
+.lib-empty{border:2px dashed var(--line);border-radius:var(--radius);padding:44px 20px;text-align:center;color:var(--ink-soft);background:#fff;}
+.lib-empty .big{font-size:38px;display:block;margin-bottom:8px;}
+.lib-empty b{display:block;color:var(--navy);font-size:16px;margin-bottom:4px;}
+@media(max-width:760px){
+  .lib-tabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;margin:0 -16px 20px;padding:12px 16px 4px;scrollbar-width:none;}
+  .lib-tabs::-webkit-scrollbar{display:none;}
+  .lib-tab{flex-shrink:0;padding:9px 14px;font-size:13px;}
+  .book-viewer iframe{height:70vh;}
+}
+
 /* ---------- Chat ---------- */
 .chat-shell{display:grid;grid-template-columns:230px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;height:min(580px,80vh);box-shadow:var(--shadow);}
 @media(max-width:760px){.chat-shell{grid-template-columns:1fr;height:min(560px,72vh);}}
@@ -571,9 +603,10 @@ button,a{-webkit-tap-highlight-color:transparent;}
     </div>
     <div class="nav">
       <button class="tab-btn active" data-tab="home"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg><span class="tab-lb">Trang chủ</span><span class="tab-lb-s">Trang chủ</span></button>
+      <button class="tab-btn" data-tab="library"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M10 7l4 2.5-4 2.5z"/></svg><span class="tab-lb">Thư viện</span><span class="tab-lb-s">Thư viện</span></button>
       <button class="tab-btn role-citizen" data-tab="profile" style="display:none;"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg><span class="tab-lb">Hồ sơ sức khỏe</span><span class="tab-lb-s">Hồ sơ</span></button>
       <button class="tab-btn role-citizen" data-tab="care" style="display:none;"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg><span class="tab-lb">Chăm sóc sức khỏe</span><span class="tab-lb-s">Chăm sóc</span></button>
-      <button class="tab-btn role-citizen" data-tab="chat" style="display:none;"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg><span class="tab-lb">Trợ lý AI</span><span class="tab-lb-s">Trợ lý AI</span></button>
+      <button class="tab-btn role-citizen" data-tab="chat" style="display:none;"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg><span class="tab-lb">Trợ lý sức khỏe</span><span class="tab-lb-s">Trợ lý</span></button>
       <button class="tab-btn role-medical" data-tab="medical" style="display:none;"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M12 8v8M8 12h8"/></svg><span class="tab-lb">Nhân viên y tế</span><span class="tab-lb-s">Y tế</span></button>
       <button class="tab-btn role-director" data-tab="director" style="display:none;"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M10 21v-5h4v5"/><path d="M12 8v4M10 10h4"/></svg><span class="tab-lb">Giám đốc CSYT</span><span class="tab-lb-s">Giám đốc</span></button>
       <button class="tab-btn nav-login" onclick="openAuthModal('login')"><svg class="tab-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span class="tab-lb">Đăng nhập</span><span class="tab-lb-s">Đăng nhập</span></button>
@@ -638,7 +671,7 @@ button,a{-webkit-tap-highlight-color:transparent;}
         <h1>Ánh sáng dẫn đường<br>cho <span>sức khỏe</span> đảo xa</h1>
         <p>Nền tảng AI hỗ trợ cảnh báo nguy cơ sức khỏe và kết nối chăm sóc y tế từ xa — giúp người dân Côn Đảo tiếp cận bác sĩ, bệnh viện và chính quyền chỉ trong vài giây, dù cách đất liền 230km.</p>
         <div class="hero-ctas">
-          <button class="btn btn-primary" onclick="switchTab('chat')">Mở trợ lý AI</button>
+          <button class="btn btn-primary" onclick="switchTab('chat')">Mở trợ lý sức khỏe</button>
           <button class="btn btn-outline" onclick="switchTab('profile')">Tạo hồ sơ sức khỏe</button>
         </div>
         <div class="hero-stats">
@@ -691,16 +724,16 @@ button,a{-webkit-tap-highlight-color:transparent;}
             <div><b>Chị Lan</b><div class="t-loc">Khu dân cư 5, Côn Đảo</div></div>
           </div>
           <div class="stars">★★★★★</div>
-          <p>"Nửa đêm con sốt cao mà không biết hỏi ai, may nhờ trợ lý AI hướng dẫn kịp thời."</p>
+          <p>"Nửa đêm con sốt cao mà không biết hỏi ai, may nhờ trợ lý sức khỏe hướng dẫn kịp thời."</p>
         </div>
       </div>
       <div>
         <div class="eyebrow about-eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg> GIỚI THIỆU</div>
         <h2>Giải Pháp Chăm Sóc Sức Khỏe Hợp Lý Cho Đảo Xa</h2>
-        <p class="lead">Côn Đảo cách đất liền 230km, việc tiếp cận y tế chuyên sâu còn nhiều hạn chế. Hải Đăng Sức Khỏe kết nối người dân với Trạm Y tế Côn Đảo, bác sĩ chuyên khoa từ xa và trợ lý AI — để không ai phải đơn độc khi cần chăm sóc sức khỏe.</p>
+        <p class="lead">Côn Đảo cách đất liền 230km, việc tiếp cận y tế chuyên sâu còn nhiều hạn chế. Hải Đăng Sức Khỏe kết nối người dân với Trạm Y tế Côn Đảo, bác sĩ chuyên khoa từ xa và trợ lý sức khỏe — để không ai phải đơn độc khi cần chăm sóc sức khỏe.</p>
         <div class="check-grid">
           <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Hồ sơ sức khỏe cá nhân</div>
-          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Trợ lý AI tư vấn 24/7</div>
+          <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Trợ lý sức khỏe tư vấn 24/7</div>
           <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Nhắc lịch uống thuốc</div>
           <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Kết nối khẩn cấp tức thì</div>
           <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Theo dõi chỉ số sức khỏe</div>
@@ -737,7 +770,7 @@ button,a{-webkit-tap-highlight-color:transparent;}
         </div>
         <div class="svc-card">
           <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg></div>
-          <h3>Trợ lý AI</h3><div class="svc-stat">Tư vấn 24/7</div>
+          <h3>Trợ lý sức khỏe</h3><div class="svc-stat">Tư vấn 24/7</div>
           <button class="svc-more" onclick="switchTab('chat')">XEM THÊM</button>
         </div>
         <div class="svc-card">
@@ -761,7 +794,7 @@ button,a{-webkit-tap-highlight-color:transparent;}
           <button class="svc-more" onclick="switchTab('profile')">XEM THÊM</button>
         </div>
       </div>
-      <div class="svc-footer">Cần hỗ trợ ngay bây giờ? <button onclick="switchTab('chat')">Mở trợ lý AI →</button></div>
+      <div class="svc-footer">Cần hỗ trợ ngay bây giờ? <button onclick="switchTab('chat')">Mở trợ lý sức khỏe →</button></div>
     </div>
   </div>
 
@@ -771,7 +804,7 @@ button,a{-webkit-tap-highlight-color:transparent;}
       <div>
         <div class="eyebrow" style="color:#7FC4A0;">MẠNG LƯỚI KẾT NỐI</div>
         <h2>Không Ai Đơn Độc Khi Cần Chăm Sóc Sức Khỏe</h2>
-        <p>Mỗi người dân trên đảo đều được kết nối trực tiếp với Trạm Y tế Côn Đảo, đội ngũ bác sĩ chuyên khoa tại đất liền và trợ lý AI túc trực 24/7 — sẵn sàng hỗ trợ ngay khi cần, dù ở khu dân cư xa nhất.</p>
+        <p>Mỗi người dân trên đảo đều được kết nối trực tiếp với Trạm Y tế Côn Đảo, đội ngũ bác sĩ chuyên khoa tại đất liền và trợ lý sức khỏe túc trực 24/7 — sẵn sàng hỗ trợ ngay khi cần, dù ở khu dân cư xa nhất.</p>
         <div class="network-ctas">
           <button class="btn btn-primary" onclick="switchTab('profile')">Tạo hồ sơ ngay</button>
           <button class="btn btn-ghost-light" onclick="switchTab('chat')">Tư vấn miễn phí</button>
@@ -786,7 +819,7 @@ button,a{-webkit-tap-highlight-color:transparent;}
         <div class="net-node" style="left:22%;top:22%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L4 20h16L12 2z"/></svg></div><span>Trạm Y tế Côn Đảo</span></div>
         <div class="net-node" style="left:78%;top:22%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2h4v8h8v4h-8v8h-4v-8H2v-4h8z"/></svg></div><span>Bệnh viện tuyến trên</span></div>
         <div class="net-node center" style="left:50%;top:50%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div><span>Người dân Côn Đảo</span></div>
-        <div class="net-node" style="left:50%;top:82%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg></div><span>Trợ lý AI 24/7</span></div>
+        <div class="net-node" style="left:50%;top:82%;"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-8.4 8.4 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12.5 3h.1a8.4 8.4 0 0 1 8.4 8.4z"/></svg></div><span>Trợ lý sức khỏe 24/7</span></div>
       </div>
     </div>
   </div>
@@ -942,9 +975,76 @@ button,a{-webkit-tap-highlight-color:transparent;}
   </div>
 </div>
 
-<!-- CHATBOT -->
+<!-- THƯ VIỆN: video, cẩm nang, poster, đại sứ số -->
+<div id="panel-library" class="panel">
+  <div class="panel-hero"><h2>Thư Viện Sức Khỏe</h2><p>Video hướng dẫn, video tuyên truyền, cẩm nang và tài liệu truyền thông dành cho người dân Côn Đảo.</p></div>
+  <div class="wrap panel-body">
+    <div class="lib-tabs" role="tablist">
+      <button class="lib-tab active" data-lib="guide-video">🎬 Hướng dẫn sử dụng</button>
+      <button class="lib-tab" data-lib="promo-video">📣 Video tuyên truyền</button>
+      <button class="lib-tab" data-lib="handbook">📘 Cẩm nang</button>
+      <button class="lib-tab" data-lib="poster">🖼️ Poster</button>
+      <button class="lib-tab" data-lib="ambassador">🤝 Đại sứ số</button>
+    </div>
+
+    <section class="lib-sec active" id="lib-guide-video">
+      <h3>Video hướng dẫn sử dụng web app</h3>
+      <p class="lib-desc">Các bước đăng ký, tạo hồ sơ sức khỏe, theo dõi chỉ số, trò chuyện với trợ lý sức khỏe và gọi SOS.</p>
+      <video class="lib-video portrait" controls preload="metadata" playsinline src="huong-dan-su-dung.mp4"></video>
+    </section>
+
+    <section class="lib-sec" id="lib-promo-video">
+      <h3>Video tuyên truyền</h3>
+      <p class="lib-desc">Chủ động chăm sóc sức khỏe cùng Hải Đăng Sức Khỏe Côn Đảo.</p>
+      <video class="lib-video" controls preload="metadata" playsinline src="tuyen-truyen.mp4"></video>
+    </section>
+
+    <section class="lib-sec" id="lib-handbook">
+      <h3>Cẩm nang</h3>
+      <p class="lib-desc">Đọc trực tiếp trên ứng dụng hoặc mở trong thẻ mới để in, lưu.</p>
+      <div class="book-grid">
+        <div class="book-card">
+          <div class="book-ic">📗</div>
+          <h4>Cẩm nang Hải Đăng Sức Khỏe</h4>
+          <p>Hướng dẫn dùng ứng dụng: tạo hồ sơ, theo dõi chỉ số, nhận cảnh báo, tư vấn từ xa, SOS — và kiến thức chủ động chăm sóc sức khỏe.</p>
+          <div class="book-actions">
+            <button class="btn btn-primary" onclick="openBook('cam-nang-hai-dang.html','Cẩm nang Hải Đăng Sức Khỏe')">Đọc ngay</button>
+            <a class="btn btn-outline" href="cam-nang-hai-dang.html" target="_blank" rel="noopener">Mở thẻ mới</a>
+          </div>
+        </div>
+        <div class="book-card">
+          <div class="book-ic">🌿</div>
+          <h4>Sống Khỏe Côn Đảo</h4>
+          <p>Sổ tay sống khỏe chủ động: kiến thức phòng bệnh, dinh dưỡng, vận động và chăm sóc sức khỏe cho người dân trên đảo.</p>
+          <div class="book-actions">
+            <button class="btn btn-primary" onclick="openBook('song-khoe-con-dao.html','Sống Khỏe Côn Đảo')">Đọc ngay</button>
+            <a class="btn btn-outline" href="song-khoe-con-dao.html" target="_blank" rel="noopener">Mở thẻ mới</a>
+          </div>
+        </div>
+      </div>
+      <div class="book-viewer" id="book-viewer">
+        <div class="book-viewer-bar"><b id="book-viewer-title"></b><button class="btn btn-outline" onclick="closeBook()">Đóng ✕</button></div>
+        <iframe id="book-frame" title="Cẩm nang" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <section class="lib-sec" id="lib-poster">
+      <h3>Poster</h3>
+      <p class="lib-desc">Poster truyền thông về sức khỏe cộng đồng.</p>
+      <div class="lib-empty" id="poster-gallery"><span class="big">🖼️</span><b>Đang cập nhật</b>Poster sẽ được bổ sung trong thời gian tới.</div>
+    </section>
+
+    <section class="lib-sec" id="lib-ambassador">
+      <h3>Đại sứ số</h3>
+      <p class="lib-desc"></p>
+      <div class="lib-empty" id="ambassador-content"><span class="big">🤝</span><b>Đang cập nhật</b>Nội dung Đại sứ số sẽ được bổ sung trong thời gian tới.</div>
+    </section>
+  </div>
+</div>
+
+<!-- TRỢ LÝ SỨC KHỎE -->
 <div id="panel-chat" class="panel">
-  <div class="panel-hero"><h2>Trợ Lý AI</h2><p>Tư vấn sơ bộ dựa trên hồ sơ sức khỏe — không thay thế bác sĩ chuyên môn.</p></div>
+  <div class="panel-hero"><h2>Trợ Lý Sức Khỏe</h2><p>Tư vấn sơ bộ dựa trên hồ sơ sức khỏe — không thay thế bác sĩ chuyên môn.</p></div>
   <div class="wrap panel-body">
     <div class="chat-shell">
       <div class="chat-side">
@@ -962,12 +1062,12 @@ button,a{-webkit-tap-highlight-color:transparent;}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" style="width:16px;height:16px;"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
         </button>
         <div class="chat-input">
-          <input id="chat-text" placeholder="Nhập câu hỏi về sức khỏe..." onkeydown="if(event.key==='Enter')sendChat()">
-          <button class="send-btn" onclick="sendChat()">Gửi</button>
+          <input id="chat-text" placeholder="Nhập câu hỏi về sức khỏe..." onkeydown="if(event.key==='Enter' && !event.isComposing && event.keyCode!==229){event.preventDefault();sendChat();}">
+          <button class="send-btn" id="chat-send-btn" onclick="sendChat()">Gửi</button>
         </div>
       </div>
     </div>
-    <div class="disclaimer">⚠️ Trợ lý AI chỉ mang tính chất tham khảo, không thay thế chẩn đoán hoặc điều trị từ bác sĩ chuyên môn. Trong trường hợp khẩn cấp, hệ thống sẽ kết nối trực tiếp đến cơ sở y tế hoặc chính quyền địa phương thay vì tiếp tục tư vấn.</div>
+    <div class="disclaimer">⚠️ Trợ lý sức khỏe chỉ mang tính chất tham khảo, không thay thế chẩn đoán hoặc điều trị từ bác sĩ chuyên môn. Trong trường hợp khẩn cấp, hệ thống sẽ kết nối trực tiếp đến cơ sở y tế hoặc chính quyền địa phương thay vì tiếp tục tư vấn.</div>
   </div>
 </div>
 
@@ -1308,6 +1408,7 @@ function switchTab(name){
     openAuthModal('login');
     return;
   }
+  if(name!=='library') pauseLibraryVideos();
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
@@ -1316,6 +1417,26 @@ function switchTab(name){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 document.querySelectorAll('.tab-btn[data-tab]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+// ---------- Thư viện ----------
+document.querySelectorAll('.lib-tab').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.lib-tab').forEach(x=>x.classList.toggle('active', x===b));
+  document.querySelectorAll('.lib-sec').forEach(sec=>sec.classList.toggle('active', sec.id==='lib-'+b.dataset.lib));
+  pauseLibraryVideos();
+}));
+function pauseLibraryVideos(){ document.querySelectorAll('#panel-library video').forEach(v=>v.pause()); }
+function openBook(url, title){
+  document.getElementById('book-frame').src = url;
+  document.getElementById('book-viewer-title').textContent = title;
+  const viewer = document.getElementById('book-viewer');
+  viewer.classList.add('show');
+  viewer.scrollIntoView({behavior:'smooth', block:'start'});
+}
+function closeBook(){
+  document.getElementById('book-viewer').classList.remove('show');
+  document.getElementById('book-frame').removeAttribute('src');
+}
+
 
 // ---------- State ----------
 let reminders = [
@@ -2319,7 +2440,7 @@ function renderMarkdown(text){
   let html = '';
   let inList = false;
   lines.forEach(line=>{
-    const trimmed = line.trim();
+    const trimmed = line.trim().replace(/^#{1,4}\s+/,'');
     if(trimmed.startsWith('- ') || trimmed.startsWith('* ')){
       if(!inList){ html += '<ul>'; inList = true; }
       html += `<li>${trimmed.slice(2)}</li>`;
@@ -2376,7 +2497,17 @@ function syncOrderFromDOM(){
   messages.sort((a,b)=> order.indexOf(a.id) - order.indexOf(b.id));
 }
 function getHistory(){
-  return messages.filter(m=>m.role==='user'||m.role==='assistant').map(m=>({role:m.role, content:m.content}));
+  const out = [];
+  messages.filter(m=>m.role==='user'||m.role==='assistant').forEach(m=>{
+    const last = out[out.length-1];
+    if(last && last.role===m.role) last.content += '\n' + m.content;
+    else out.push({role:m.role, content:m.content});
+  });
+  // API yêu cầu hội thoại bắt đầu bằng tin của người dùng
+  while(out.length && out[0].role!=='user') out.shift();
+  const recent = out.slice(-16);
+  while(recent.length && recent[0].role!=='user') recent.shift();
+  return recent;
 }
 
 function appendMsg(text, role, isMarkdown){
@@ -2449,10 +2580,17 @@ function containsEmergency(text){
   return EMERGENCY_WORDS.some(w => lower.includes(w));
 }
 
+let chatBusy = false;
+function setChatBusy(v){
+  chatBusy = v;
+  const btn = document.getElementById('chat-send-btn');
+  if(btn){ btn.disabled = v; btn.style.opacity = v ? .6 : 1; }
+}
+
 async function sendChat(){
   const input = document.getElementById('chat-text');
   const text = input.value.trim();
-  if(!text) return;
+  if(!text || chatBusy) return;
   appendMsg(text, 'user');
   input.value='';
 
@@ -2462,6 +2600,7 @@ async function sendChat(){
   }
 
   const typingEl = appendTyping();
+  setChatBusy(true);
 
   try{
     const activeMember = selectedMember();
@@ -2476,8 +2615,10 @@ Nguyên tắc trả lời:
 2. Khi đã đủ thông tin, đưa ra nhận định sơ bộ có cấu trúc: tình trạng có thể liên quan đến gì (không chẩn đoán khẳng định), việc nên làm tại nhà, và khi nào cần đến cơ sở y tế. Dùng gạch đầu dòng khi liệt kê.
 3. KHÔNG chẩn đoán xác định, KHÔNG kê đơn thuốc hay liều lượng cụ thể.
 4. Nếu phát hiện dấu hiệu nghiêm trọng, khuyên dùng ngay nút khẩn cấp trong ứng dụng thay vì tiếp tục tư vấn.
-5. Văn phong ấm áp, xưng "mình", gọi người dùng là "bạn", ngắn gọn (dưới 150 từ), có thể dùng in đậm (**...**) cho ý quan trọng.
-6. ${profileContext}`;
+5. Văn phong ấm áp, xưng "mình", gọi người dùng là "bạn", ngắn gọn khoảng 3-8 câu, có thể dùng in đậm (**...**) cho ý quan trọng.
+6. Luôn trả lời bằng tiếng Việt. Chỉ viết nội dung gửi cho người dùng — tuyệt đối không viết ra suy nghĩ, kế hoạch, ghi chú nội bộ hay đếm số từ.
+7. Người dùng có thể gõ tắt, không dấu hoặc gửi tin bị tách đôi (VD: "nhức ng" = nhức người, "lm gì" = làm gì) — hãy hiểu theo ý gộp lại và trả lời một lần.
+8. ${profileContext}`;
 
     const response = await fetch(CHAT_API_URL, {
       method: "POST",
@@ -2490,14 +2631,19 @@ Nguyên tắc trả lời:
     const data = await response.json();
     typingEl.remove();
     if (!response.ok) {
-      appendMsg(data.error || 'Không thể kết nối trợ lý AI lúc này. Nếu cần hỗ trợ gấp, vui lòng dùng nút "Trường hợp khẩn cấp".', 'bot');
+      appendMsg(data.error || 'Không thể kết nối trợ lý sức khỏe lúc này. Nếu cần hỗ trợ gấp, vui lòng dùng nút "Trường hợp khẩn cấp".', 'bot');
       return;
     }
-    const reply = (data.content || []).map(b=>b.text||'').join('\n').trim() || 'Xin lỗi, tôi chưa thể phản hồi lúc này. Vui lòng thử lại.';
+    let reply = (data.content || []).filter(b=>b.type==='text' || (!b.type && b.text)).map(b=>b.text||'').join('\n').trim();
+    if(!reply) reply = 'Xin lỗi, mình chưa thể phản hồi lúc này. Bạn vui lòng thử lại nhé.';
+    else if(data.stop_reason==='max_tokens') reply += '…\n\n(Câu trả lời dài nên bị cắt bớt — bạn nhắn "tiếp" để mình nói tiếp nhé.)';
     appendMsg(reply, 'bot', true);
   }catch(err){
     typingEl.remove();
-    appendMsg('Không thể kết nối trợ lý AI lúc này (kiểm tra lại proxy server đã chạy chưa). Nếu cần hỗ trợ gấp, vui lòng dùng nút "Trường hợp khẩn cấp".', 'bot');
+    appendMsg('Không thể kết nối trợ lý sức khỏe lúc này (máy chủ có thể đang khởi động, vui lòng thử lại sau ít giây). Nếu cần hỗ trợ gấp, vui lòng dùng nút "Trường hợp khẩn cấp".', 'bot');
+  }finally{
+    setChatBusy(false);
+    if(!window.matchMedia('(max-width:760px)').matches) document.getElementById('chat-text').focus();
   }
 }
 

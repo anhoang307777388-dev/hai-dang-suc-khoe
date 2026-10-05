@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="Hải Đăng">
 <title>Hải Đăng Sức Khỏe — Côn Đảo</title>
 <!-- Thư viện tạo mã QR (hiển thị) và đọc mã QR (quét bằng camera) -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
@@ -1278,6 +1278,10 @@ button,a{-webkit-tap-highlight-color:transparent;}
 const API_BASE_URL = 'https://hai-dang-backend-mongo-1.onrender.com';
 const CHAT_API_URL = API_BASE_URL + '/api/chat';
 
+// Server Render gói miễn phí tự "ngủ" sau ~15 phút không dùng, lần gọi đầu phải chờ nó khởi động lại.
+// Gọi nhẹ một lần ngay khi mở trang để server kịp thức dậy trước khi người dùng gửi câu hỏi.
+fetch(API_BASE_URL + '/api/health').catch(()=>{});
+
 // ---------- Auth state ----------
 let authToken = localStorage.getItem('hd_token') || null;
 let currentUser = null;
@@ -1398,7 +1402,8 @@ async function restoreSession(){
   }
   renderAuthUI();
 }
-restoreSession();
+// Chạy sau khi toàn bộ script đã nạp xong — tránh lỗi gọi tới biến khai báo phía dưới (vd. sosStaffPollTimer) khi chưa đăng nhập.
+document.addEventListener('DOMContentLoaded', restoreSession);
 
 // ---------- Tabs ----------
 const PROTECTED_TABS = { profile:'citizen', care:'citizen', chat:'citizen', medical:'medical', admin:'admin', director:'director' };

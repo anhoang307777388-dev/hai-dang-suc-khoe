@@ -285,6 +285,55 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--blue);outline-of
   .book-viewer iframe{height:70vh;}
 }
 
+
+/* ---------- Poster ---------- */
+.poster-wrap{max-width:760px;margin:0 auto;}
+.poster-img{display:block;width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--shadow);cursor:zoom-in;background:#fff;}
+.poster-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
+.poster-zoom{position:fixed;inset:0;z-index:9800;background:rgba(8,20,32,.92);display:none;overflow:auto;-webkit-overflow-scrolling:touch;}
+.poster-zoom.show{display:block;}
+.poster-zoom img{display:block;width:min(1600px,200%);max-width:none;margin:0 auto;}
+.poster-zoom-close{position:fixed;top:14px;right:14px;z-index:9801;background:#fff;color:var(--navy);border:none;border-radius:999px;padding:10px 16px;font-weight:800;font-family:inherit;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.3);}
+@media(min-width:761px){.poster-zoom img{width:min(1600px,100%);}}
+
+/* ---------- Đại sứ số ---------- */
+.amb-hero{background:linear-gradient(135deg,#FFF6EC 0%,#FDEBDD 100%);border:1px solid #F3DCC6;border-radius:var(--radius);padding:30px 26px;position:relative;overflow:hidden;}
+.amb-hero small{display:block;font-size:13px;color:var(--ink-soft);margin-bottom:4px;}
+.amb-hero h4{font-size:clamp(26px,4vw,38px);line-height:1.15;color:var(--navy);margin:0 0 10px;font-weight:800;}
+.amb-hero p{margin:0;color:var(--ink-soft);font-size:14.5px;max-width:560px;line-height:1.6;}
+.amb-hero .amb-wave{position:absolute;right:18px;top:14px;font-size:54px;opacity:.9;}
+.amb-block{margin-top:26px;}
+.amb-block>h4{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-dark);margin:0 0 12px;font-weight:800;}
+.amb-intro{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:stretch;}
+.amb-intro .card p{font-size:14.5px;line-height:1.65;color:var(--ink);margin:0 0 10px;}
+.amb-photo{width:100%;height:100%;min-height:260px;object-fit:cover;border-radius:var(--radius);display:block;}
+.amb-quote{border-left:4px solid var(--coral);background:var(--coral-light);padding:12px 16px;border-radius:0 10px 10px 0;font-style:italic;color:var(--navy);font-size:14.5px;line-height:1.6;margin-top:12px;}
+.amb-leader{display:flex;flex-direction:column;gap:6px;}
+.amb-leader b{color:var(--navy);font-size:16px;}
+.amb-leader .role{font-size:12px;font-weight:800;color:var(--coral);letter-spacing:.06em;text-transform:uppercase;}
+.amb-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+.amb-item{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px;}
+.amb-item .ic{font-size:24px;display:block;margin-bottom:6px;}
+.amb-item b{display:block;color:var(--navy);font-size:15px;margin-bottom:4px;}
+.amb-item span{font-size:13.5px;color:var(--ink-soft);line-height:1.55;}
+.amb-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.amb-stat{background:var(--navy);color:#fff;border-radius:var(--radius);padding:20px 16px;text-align:center;}
+.amb-stat b{display:block;font-size:34px;font-weight:800;line-height:1;margin-bottom:6px;}
+.amb-stat span{font-size:12.5px;color:#B7D3E8;line-height:1.45;display:block;}
+.amb-join{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-soft) 100%);color:#fff;border-radius:var(--radius);padding:26px;}
+.amb-join h4{color:#fff;font-size:20px;margin:0 0 6px;}
+.amb-join p{color:#B7D3E8;font-size:14px;margin:0 0 16px;}
+.amb-join label{color:#CFE0F0;}
+.amb-join .grid-2{gap:12px;}
+.amb-join-status{margin-top:10px;font-size:13.5px;font-weight:700;}
+@media(max-width:760px){
+  .amb-intro{grid-template-columns:1fr;}
+  .amb-photo{min-height:0;height:auto;max-height:420px;}
+  .amb-stats{grid-template-columns:1fr;}
+  .amb-hero{padding:24px 18px;}
+  .amb-hero .amb-wave{font-size:40px;}
+}
+
 /* ---------- Chat ---------- */
 .chat-shell{display:grid;grid-template-columns:230px 1fr;gap:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#fff;height:min(580px,80vh);box-shadow:var(--shadow);}
 @media(max-width:760px){.chat-shell{grid-template-columns:1fr;height:min(560px,72vh);}}
@@ -672,7 +721,7 @@ button,a{-webkit-tap-highlight-color:transparent;}
     <div class="wrap hero-inner">
       <div>
         <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> DỊCH VỤ Y TẾ TỪ XA 24/7</div>
-        <h1>Ánh sáng dẫn đường<br>cho <span>sức khỏe</span> đảo xa</h1>
+        <h1>Chủ động hôm nay,<br><span>an tâm</span> ngày mai</h1>
         <p>Nền tảng AI hỗ trợ cảnh báo nguy cơ sức khỏe và kết nối chăm sóc y tế từ xa — giúp người dân Côn Đảo tiếp cận bác sĩ, bệnh viện và chính quyền chỉ trong vài giây, dù cách đất liền 179km.</p>
         <div class="hero-ctas">
           <button class="btn btn-primary" onclick="switchTab('chat')">Mở trợ lý sức khỏe</button>
@@ -1033,15 +1082,100 @@ button,a{-webkit-tap-highlight-color:transparent;}
     </section>
 
     <section class="lib-sec" id="lib-poster">
-      <h3>Poster</h3>
-      <p class="lib-desc">Poster truyền thông về sức khỏe cộng đồng.</p>
-      <div class="lib-empty" id="poster-gallery"><span class="big">🖼️</span><b>Đang cập nhật</b>Poster sẽ được bổ sung trong thời gian tới.</div>
+      <h3>Poster dự án</h3>
+      <p class="lib-desc">Nghiên cứu hành vi chăm sóc sức khỏe chủ động và phát triển hệ sinh thái số hỗ trợ phòng ngừa rủi ro sức khỏe cho người dân tại Đặc khu Côn Đảo. Bấm vào poster để phóng to.</p>
+      <div class="poster-wrap">
+        <img class="poster-img" src="poster-hai-dang.jpg" alt="Poster dự án Hải Đăng Sức Khỏe Côn Đảo" loading="lazy" onclick="openPosterZoom()">
+        <div class="poster-actions">
+          <button class="btn btn-primary" onclick="openPosterZoom()">🔍 Phóng to</button>
+          <a class="btn btn-outline" href="poster-hai-dang-full.jpg" target="_blank" rel="noopener" download>⬇️ Tải bản đầy đủ</a>
+        </div>
+      </div>
     </section>
 
     <section class="lib-sec" id="lib-ambassador">
-      <h3>Đại sứ số</h3>
-      <p class="lib-desc"></p>
-      <div class="lib-empty" id="ambassador-content"><span class="big">🤝</span><b>Đang cập nhật</b>Nội dung Đại sứ số sẽ được bổ sung trong thời gian tới.</div>
+      <div class="amb-hero">
+        <span class="amb-wave">👋</span>
+        <small>Xin chào, chúng tớ là</small>
+        <h4>Đại sứ<br>Sức khỏe số</h4>
+        <p>Niềm tự hào cho một kỷ nguyên sức khỏe số biển đảo phát triển.</p>
+      </div>
+
+      <div class="amb-block">
+        <h4>Giới thiệu</h4>
+        <div class="amb-intro">
+          <div class="card">
+            <h3 style="margin-bottom:10px;">Nơi hội tụ những tình nguyện viên vì sức khỏe cộng đồng</h3>
+            <p>Câu lạc bộ Đại sứ sức khỏe số là nơi các bạn trẻ yêu công nghệ và những bạn trẻ nhiệt huyết cùng nhau hướng dẫn người dân sử dụng ứng dụng sức khỏe, lan tỏa kiến thức chăm sóc bản thân và kết nối cộng đồng bằng sự tử tế, nhiệt huyết và trách nhiệm.</p>
+            <p><b>Mục tiêu:</b> Mỗi sự giúp đỡ là một bước tiến để sức khỏe số đến gần hơn với mọi người dân.</p>
+          </div>
+          <img class="amb-photo" src="dai-su-hoat-dong.jpg" alt="Đại sứ hướng dẫn người cao tuổi sử dụng ứng dụng Hải Đăng Sức Khỏe" loading="lazy">
+        </div>
+      </div>
+
+      <div class="amb-block">
+        <h4>Chủ tịch CLB</h4>
+        <div class="card amb-leader">
+          <span class="role">Chủ tịch CLB Đại sứ sức khỏe số</span>
+          <b>Đỗ Nguyên Anh</b>
+          <p style="font-size:14.5px;line-height:1.65;margin:4px 0 0;">Xin chào, mình bắt đầu hành trình này từ khi nhận ra nhiều người thân, hàng xóm của mình, nhất là người lớn tuổi và bà con ngư dân, chưa có thói quen theo dõi sức khỏe thường xuyên vì ở xa cơ sở y tế và chưa quen với công nghệ. Từ đó, mình cùng các bạn thành lập CLB với mong muốn đưa một công cụ số đơn giản đến gần từng gia đình.</p>
+          <div class="amb-quote">“Chăm sóc sức khỏe không phải việc của riêng ai. Mỗi Đại sứ là một mắt xích giúp cộng đồng khỏe mạnh hơn mỗi ngày.”</div>
+        </div>
+      </div>
+
+      <div class="amb-block">
+        <h4>Sứ mệnh và hoạt động</h4>
+        <div class="amb-grid">
+          <div class="amb-item"><span class="ic">📱</span><b>Hướng dẫn sử dụng ứng dụng</b><span>Đồng hành cùng người cao tuổi, người mắc bệnh mạn tính, phụ nữ mang thai và ngư dân trong việc cài đặt, đăng ký hồ sơ sức khỏe và sử dụng các tính năng của ứng dụng.</span></div>
+          <div class="amb-item"><span class="ic">🏠</span><b>Hỗ trợ tại nhà và tại cộng đồng</b><span>Đến tận từng hộ gia đình, khu dân cư để hướng dẫn trực tiếp những người chưa quen công nghệ, giúp họ tự theo dõi chỉ số sức khỏe mỗi ngày.</span></div>
+          <div class="amb-item"><span class="ic">🩺</span><b>Kết nối người dân với nhân viên y tế</b><span>Tổ chức các buổi nói chuyện, dán mã QR ứng dụng “Hải Đăng Sức Khỏe”, cẩm nang trang lật và các video tương tác tuyên truyền ở khu dân cư, chung cư, nơi cộng đồng sinh hoạt.</span></div>
+          <div class="amb-item"><span class="ic">📣</span><b>Truyền thông kiến thức sức khỏe</b><span>Thực hiện video, hình ảnh, bài đăng tuyên truyền trên mạng xã hội để nhiều người biết đến và sử dụng công cụ chăm sóc sức khỏe số.</span></div>
+        </div>
+      </div>
+
+      <div class="amb-block">
+        <h4>Dấu ấn của chúng mình</h4>
+        <div class="amb-stats">
+          <div class="amb-stat"><b>42</b><span>tình nguyện viên là thành viên đang hoạt động</span></div>
+          <div class="amb-stat"><b>12</b><span>buổi hướng dẫn, truyền thông đã tổ chức ở các điểm trường và khu dân cư</span></div>
+          <div class="amb-stat"><b>100+</b><span>hồ sơ đăng ký tham gia CLB sau các buổi tuyên truyền</span></div>
+        </div>
+      </div>
+
+      <div class="amb-block">
+        <h4>Giá trị chúng mình theo đuổi</h4>
+        <div class="amb-grid">
+          <div class="amb-item"><span class="ic">💛</span><b>Tận tâm</b><span>Lắng nghe và hỗ trợ từng người dân bằng sự kiên nhẫn.</span></div>
+          <div class="amb-item"><span class="ic">🚀</span><b>Tiên phong</b><span>Sẵn sàng học hỏi và áp dụng công nghệ vào đời sống.</span></div>
+          <div class="amb-item"><span class="ic">✅</span><b>Trách nhiệm</b><span>Chia sẻ thông tin đúng, rõ ràng, dễ hiểu.</span></div>
+          <div class="amb-item"><span class="ic">🤝</span><b>Gắn kết</b><span>Cùng nhau lan tỏa lối sống chủ động chăm sóc sức khỏe.</span></div>
+        </div>
+      </div>
+
+      <div class="amb-block">
+        <h4>Bạn sẽ nhận được gì?</h4>
+        <div class="amb-grid">
+          <div class="amb-item"><span class="ic">1️⃣</span><span>Kỹ năng giao tiếp, truyền thông và hướng dẫn cộng đồng.</span></div>
+          <div class="amb-item"><span class="ic">2️⃣</span><span>Kiến thức cơ bản về sức khỏe và chuyển đổi số y tế.</span></div>
+          <div class="amb-item"><span class="ic">3️⃣</span><span>Cơ hội tham gia các hoạt động tình nguyện ý nghĩa.</span></div>
+          <div class="amb-item"><span class="ic">4️⃣</span><span>Môi trường làm việc nhóm năng động, thân thiện.</span></div>
+        </div>
+      </div>
+
+      <div class="amb-block">
+        <div class="amb-join">
+          <h4>Tham gia CLB — để lại thông tin của cậu nhé!</h4>
+          <p>Ban chủ nhiệm CLB sẽ liên hệ lại với bạn. Bạn cần đăng nhập tài khoản người dân để gửi.</p>
+          <label>Họ và tên</label>
+          <input id="amb-name" placeholder="Nguyễn Văn A">
+          <div class="grid-2">
+            <div><label>Số điện thoại</label><input id="amb-phone" type="tel" inputmode="tel" placeholder="09xx xxx xxx"></div>
+            <div><label>Email</label><input id="amb-email" type="email" placeholder="ban@vidu.com"></div>
+          </div>
+          <button class="btn btn-primary" onclick="sendAmbassadorSignup()">Gửi đăng ký</button>
+          <div id="amb-join-status" class="amb-join-status"></div>
+        </div>
+      </div>
     </section>
   </div>
 </div>
@@ -1229,6 +1363,12 @@ button,a{-webkit-tap-highlight-color:transparent;}
     <p id="sos-active-confirmed" style="display:none;font-size:14px;color:#2E9B5C;font-weight:600;"></p>
     <button class="btn btn-outline" onclick="resolveSos()">✓ Tôi đã an toàn / hủy báo động</button>
   </div>
+</div>
+
+<!-- ================= PHÓNG TO POSTER ================= -->
+<div id="poster-zoom" class="poster-zoom" onclick="if(event.target===this)closePosterZoom()">
+  <button class="poster-zoom-close" onclick="closePosterZoom()">Đóng ✕</button>
+  <img id="poster-zoom-img" alt="Poster dự án Hải Đăng Sức Khỏe Côn Đảo (bản đầy đủ)">
 </div>
 
 <!-- ================= MÃ QR HỒ SƠ ================= -->
@@ -1444,6 +1584,50 @@ function openBook(url, title){
 function closeBook(){
   document.getElementById('book-viewer').classList.remove('show');
   document.getElementById('book-frame').removeAttribute('src');
+}
+
+// ---------- Poster ----------
+function openPosterZoom(){
+  const img = document.getElementById('poster-zoom-img');
+  if(!img.getAttribute('src')) img.src = 'poster-hai-dang-full.jpg';
+  document.getElementById('poster-zoom').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closePosterZoom(){
+  document.getElementById('poster-zoom').classList.remove('show');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePosterZoom(); });
+
+// ---------- Đăng ký Đại sứ sức khỏe số ----------
+async function sendAmbassadorSignup(){
+  const status = document.getElementById('amb-join-status');
+  const name = document.getElementById('amb-name').value.trim();
+  const phone = document.getElementById('amb-phone').value.trim();
+  const email = document.getElementById('amb-email').value.trim();
+  if(!name || (!phone && !email)){
+    status.style.color = '#FFB4A2';
+    status.textContent = 'Vui lòng nhập họ tên và ít nhất số điện thoại hoặc email.';
+    return;
+  }
+  if(!currentUser || currentUser.role!=='citizen'){
+    status.style.color = '#FFB4A2';
+    status.textContent = 'Vui lòng đăng nhập tài khoản người dân để gửi đăng ký.';
+    openAuthModal('login');
+    return;
+  }
+  try{
+    await apiFetch('/api/requests', { method:'POST', body: JSON.stringify({
+      type: 'Đăng ký tham gia CLB Đại sứ sức khỏe số',
+      note: `Họ tên: ${name} · SĐT: ${phone||'—'} · Email: ${email||'—'}`
+    }) });
+    status.style.color = '#9BE7B0';
+    status.textContent = '✓ Đã gửi đăng ký! Ban chủ nhiệm CLB sẽ liên hệ với bạn sớm.';
+    ['amb-name','amb-phone','amb-email'].forEach(id=>document.getElementById(id).value='');
+  }catch(err){
+    status.style.color = '#FFB4A2';
+    status.textContent = 'Chưa gửi được: ' + err.message;
+  }
 }
 
 

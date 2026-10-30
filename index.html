@@ -149,6 +149,65 @@ img,svg{display:block;max-width:100%;}
 
 .tide{display:block;width:100%;height:46px;margin-top:-2px;}
 
+
+/* Nền ảnh Côn Đảo cho phần đầu trang chủ */
+.hero{
+  background:
+    linear-gradient(90deg,rgba(242,248,255,.97) 0%,rgba(242,248,255,.9) 38%,rgba(242,248,255,.35) 68%,rgba(242,248,255,.05) 100%),
+    url('nen-condao_10.jpg') center 60%/cover no-repeat;
+}
+.hero .hero-blob{border:6px solid rgba(255,255,255,.85);}
+.hero-blob-img{overflow:hidden;background:var(--blue-light);}
+.hero-blob-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-credit{position:absolute;right:14px;bottom:10px;font-size:11px;font-weight:700;color:#fff;background:rgba(11,42,67,.55);padding:4px 10px;border-radius:999px;}
+@media(max-width:900px){
+  .hero{
+    background:
+      linear-gradient(180deg,rgba(242,248,255,.96) 0%,rgba(242,248,255,.9) 52%,rgba(242,248,255,.3) 78%,rgba(242,248,255,.1) 100%),
+      url('nen-condao_10.jpg') 78% center/cover no-repeat;
+  }
+  .hero-credit{display:none;}
+}
+
+/* ---------- Ảnh Côn Đảo trên trang chủ ---------- */
+.hero-photo{
+  width:360px;height:360px;border-radius:46% 54% 58% 42% / 48% 42% 58% 52%;
+  overflow:hidden;position:relative;box-shadow:var(--shadow);animation:blobshift 10s ease-in-out infinite;
+  border:6px solid #fff;
+}
+.hero-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-photo .lh{position:absolute;left:14%;bottom:14%;width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.92);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(11,42,67,.25);}
+.hero-photo .lh svg{width:34px;height:34px;}
+.photo-pin{position:absolute;left:50%;top:9%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:12px;font-weight:700;padding:7px 14px;border-radius:999px;white-space:nowrap;box-shadow:var(--shadow);}
+@media(max-width:600px){.hero-photo{width:260px;height:260px;}.photo-pin{display:none;}.hero-photo .lh{width:46px;height:46px;}.hero-photo .lh svg{width:28px;height:28px;}}
+
+.condao{padding:70px 0;background:#fff;}
+.condao-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:24px;}
+.condao-head h2{font-size:clamp(24px,3.4vw,34px);color:var(--navy);margin:6px 0 0;line-height:1.2;}
+.condao-head p{max-width:440px;color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;}
+.condao-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:220px 220px;gap:12px;}
+.condao-grid figure{margin:0;position:relative;border-radius:var(--radius);overflow:hidden;background:var(--blue-light);}
+.condao-grid figure:first-child{grid-row:span 2;}
+.condao-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease;}
+.condao-grid figure:hover img{transform:scale(1.05);}
+.condao-grid figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;color:#fff;font-size:13px;font-weight:700;background:linear-gradient(transparent,rgba(8,26,42,.75));}
+.condao-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px;}
+.condao-fact{background:var(--blue-light);border-radius:14px;padding:14px 16px;}
+.condao-fact b{display:block;font-size:22px;color:var(--navy);font-weight:800;}
+.condao-fact span{font-size:12.5px;color:var(--ink-soft);}
+@media(max-width:760px){
+  .condao{padding:40px 0;}
+  .condao-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin:0 -16px;padding:0 16px 6px;scrollbar-width:none;}
+  .condao-grid::-webkit-scrollbar{display:none;}
+  .condao-grid figure{flex:0 0 78%;height:230px;scroll-snap-align:center;}
+  .condao-facts{grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .condao-fact{padding:10px;text-align:center;}
+  .condao-fact b{font-size:17px;}
+  .condao-fact span{font-size:10.5px;line-height:1.3;display:block;}
+  .swipe-hint{display:block !important;}
+}
+
+
 /* ---------- About ---------- */
 .about{padding:70px 0;background:#fff;}
 .about-inner{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center;}
@@ -739,23 +798,14 @@ button,a{-webkit-tap-highlight-color:transparent;}
           <circle cx="4" cy="22" r="3"/><circle cx="22" cy="22" r="3"/><circle cx="40" cy="22" r="3"/>
           <circle cx="4" cy="40" r="3"/><circle cx="22" cy="40" r="3"/><circle cx="40" cy="40" r="3"/>
         </g></svg></div>
-        <div class="hero-blob">
-          <svg viewBox="0 0 220 200">
-            <rect x="98" y="100" width="24" height="70" fill="#F5F8F6"/>
-            <polygon points="88,100 132,100 122,74 98,74" fill="#FF6B4A"/>
-            <rect x="95" y="52" width="30" height="24" rx="2" fill="#0B2A43"/>
-            <polygon points="92,52 128,52 110,34" fill="#E8703A"/>
-            <g class="beam">
-              <polygon points="110,48 205,18 205,84" fill="#FDECD8" opacity=".4"/>
-              <polygon points="110,48 15,18 15,84" fill="#FDECD8" opacity=".22"/>
-            </g>
-            <circle cx="110" cy="48" r="6" fill="#FFE7A8"/>
-          </svg>
+        <div class="hero-blob hero-blob-img">
+          <img id="hero-circle-img" src="con-dao-1.jpg" alt="Cung đường ven biển Côn Đảo">
         </div>
         <div class="float-card f1"><svg viewBox="0 0 24 24" fill="none" stroke="#FF6B4A" stroke-width="2.2"><polyline points="3 12 8 12 10 6 14 18 16 12 21 12"/></svg><div>Nhịp tim<small>76 bpm — ổn định</small></div></div>
         <div class="float-card f2"><svg viewBox="0 0 24 24" fill="none" stroke="#17B26A" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><div>Đã kết nối<small>Trạm Y tế Côn Đảo</small></div></div>
       </div>
     </div>
+    <span class="hero-credit">📍 Côn Đảo</span>
   </div>
   <svg class="tide" viewBox="0 0 1200 46" preserveAspectRatio="none"><path d="M0,24 C300,46 900,0 1200,24 L1200,0 L0,0 Z" fill="#F2F8FF"></path><path d="M0,30 C300,52 900,6 1200,30 L1200,46 L0,46 Z" fill="#fff"></path></svg>
 
@@ -793,6 +843,32 @@ button,a{-webkit-tap-highlight-color:transparent;}
           <div class="check-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg> Bác sĩ chuyên khoa từ xa</div>
         </div>
         <button class="btn btn-primary" onclick="switchTab('care')">Tìm hiểu thêm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CÔN ĐẢO -->
+  <div class="condao">
+    <div class="wrap">
+      <div class="condao-head">
+        <div>
+          <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> CÔN ĐẢO CỦA CHÚNG MÌNH</div>
+          <h2>Biển đảo xinh đẹp,<br>sức khỏe cần được chăm sóc</h2>
+        </div>
+        <p>Cuộc sống giữa biển khơi thật bình yên, nhưng đường đến bệnh viện tuyến trên lại rất xa. Hải Đăng Sức Khỏe ra đời để mỗi người dân trên đảo đều được chăm sóc kịp thời.</p>
+      </div>
+      <div class="condao-grid">
+        <figure><img src="con-dao-2.jpg" alt="Bờ kè ven biển Côn Đảo" loading="lazy"><figcaption>Bờ kè ven biển</figcaption></figure>
+        <figure><img src="con-dao-3.jpg" alt="Núi và biển Côn Đảo" loading="lazy"><figcaption>Núi và biển</figcaption></figure>
+        <figure><img src="con-dao-4.jpg" alt="Bãi biển Côn Đảo" loading="lazy"><figcaption>Biển xanh Côn Đảo</figcaption></figure>
+        <figure><img src="con-dao-5.jpg" alt="Chợ Côn Đảo" loading="lazy"><figcaption>Chợ Côn Đảo</figcaption></figure>
+        <figure><img src="con-dao-6.jpg" alt="Hàng cây ven biển Côn Đảo" loading="lazy"><figcaption>Hàng cây ven biển</figcaption></figure>
+      </div>
+      <div class="swipe-hint" style="display:none;font-size:12px;color:var(--ink-soft);text-align:center;margin-top:6px;">← Vuốt để xem thêm ảnh →</div>
+      <div class="condao-facts">
+        <div class="condao-fact"><b>179 km</b><span>cách đất liền</span></div>
+        <div class="condao-fact"><b>9</b><span>khu dân cư được phủ sóng</span></div>
+        <div class="condao-fact"><b>24/7</b><span>kết nối khẩn cấp</span></div>
       </div>
     </div>
   </div>
